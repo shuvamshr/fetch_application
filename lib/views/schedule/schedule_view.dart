@@ -3,6 +3,7 @@ import 'package:fetch_application/constants/icons.dart';
 import 'package:fetch_application/constants/typography.dart';
 import 'package:fetch_application/view_models/pet_view_model.dart';
 import 'package:fetch_application/view_models/schedule_view_model.dart';
+import 'package:fetch_application/views/schedule/navigations/add_tracker_view.dart';
 import 'package:fetch_application/views/schedule/navigations/schedule_history_view.dart';
 import 'package:fetch_application/views/schedule/widgets/add_tracker_button.dart';
 import 'package:fetch_application/views/schedule/widgets/app_body.dart';
@@ -77,10 +78,16 @@ class _ScheduleViewState extends State<ScheduleView> {
                 "No Upcoming For ${petViewModel.getPetName(scheduleViewModel.getActivePet().id)}",
                 style: appBodyNoteStyle,
               ),
-            )
+            ),
+          const SizedBox(height: 80),
         ],
       ),
-      floatingActionButton: AddTrackerButton(onPressed: () => print("heyo")),
+      floatingActionButton: AddTrackerButton(
+          onPressed: () => Navigator.push(
+                context,
+                CupertinoPageRoute(
+                    builder: (context) => const AddTrackerView()),
+              )),
     );
   }
 }
