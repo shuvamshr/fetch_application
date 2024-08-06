@@ -1,8 +1,19 @@
+import 'package:fetch_application/view_models/pet_view_model.dart';
+import 'package:fetch_application/view_models/schedule_view_model.dart';
 import 'package:fetch_application/views/schedule/schedule_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ScheduleViewModel()),
+        ChangeNotifierProvider(create: (_) => PetViewModel()),
+      ],
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
