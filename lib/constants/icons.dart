@@ -24,3 +24,9 @@ const Icon checkmarkIcon = Icon(
   color: green_500,
   size: 24,
 );
+
+const Icon addIcon = Icon(
+  Icons.add,
+  color: white,
+  size: 32,
+);

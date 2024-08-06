@@ -15,7 +15,20 @@ const Color white = Color(0xFFFFFFFF);
 
 // Tokens
 
-const Color bodyPrimaryBackground = gray_100;
+const Color appBodyPrimaryBackground = gray_100;
+const Color appBodySecondaryForeground = gray_500;
 
 const Color appBarPrimaryBackground = gray_100;
 const Color appBarPrimaryForeground = gray_900;
+
+const Color filterTabPrimaryForegroundActive = white;
+const Color filterTabPrimaryForegroundInactive = gray_500;
+const Color filterTabPrimaryBackgroundActive = gray_900;
+const Color filterTabPrimaryBackgroundInactive = gray_200;
+
+const Color cardPrimaryBackground = white;
+const Color cardPrimaryForeground = gray_900;
+const Color cardSecondaryForeground = gray_500;
+
+const Color buttonPrimaryBackground = gray_900;
+const Color buttonPrimaryForeground = white;
