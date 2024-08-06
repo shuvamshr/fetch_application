@@ -21,10 +21,10 @@ class TrackerCardListView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 8),
+              padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(title, style: cardListTitleStyle)),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
