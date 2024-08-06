@@ -17,3 +17,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: CircularBook
+      fonts:
+        - asset: assets/fonts/Circular-Std-Book.ttf
+    - family: CircularMedium
+      fonts:
+        - asset: assets/fonts/Circular-Std-Medium.ttf
