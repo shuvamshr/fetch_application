@@ -38,3 +38,15 @@ TextStyle cardSubheadingStyle =
     circularRegular.copyWith(fontSize: 14, color: cardSecondaryForeground);
 TextStyle cardFootnoteStyle =
     circularRegular.copyWith(fontSize: 12, color: cardSecondaryForeground);
+
+// Form Token
+
+TextStyle formLabelStyle =
+    circularProminent.copyWith(fontSize: 14, color: formPrimaryForeground);
+TextStyle formSelectionStyle =
+    circularRegular.copyWith(fontSize: 14, color: formPrimaryForeground);
+
+// Card Token
+
+TextStyle buttonTitleStyle =
+    circularProminent.copyWith(fontSize: 16, color: buttonPrimaryForeground);

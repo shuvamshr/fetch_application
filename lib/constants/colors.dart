@@ -32,3 +32,7 @@ const Color cardSecondaryForeground = gray_500;
 
 const Color buttonPrimaryBackground = gray_900;
 const Color buttonPrimaryForeground = white;
+
+const Color formPrimaryBackground = white;
+const Color formPrimaryForeground = gray_900;
+const Color formSecondaryForeground = gray_300;
