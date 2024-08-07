@@ -2,8 +2,9 @@ import 'package:fetch_application/models/category_model.dart';
 import 'package:fetch_application/models/pet_model.dart';
 import 'package:fetch_application/models/tracker_model.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
-class ScheduleViewModel extends ChangeNotifier {
+class TrackerViewModel extends ChangeNotifier {
   final List<Tracker> _trackers = [
     // Dates before August 6, 2024
     Tracker(
@@ -14,7 +15,7 @@ class ScheduleViewModel extends ChangeNotifier {
           title: "Vaccination Dose",
           description: "Monthly Vaccination",
           image: "vaccination"),
-      dateTime: DateTime(2024, 7, 25),
+      dateTime: DateTime.now(),
     ),
     Tracker(
       id: 'T002',
@@ -26,18 +27,6 @@ class ScheduleViewModel extends ChangeNotifier {
           image: "flea"),
       dateTime: DateTime(2024, 7, 30),
     ),
-    // Tracker(
-    //   id: 'T003',
-    //   pet: Pet(id: 'P003', name: "Flamingo", image: "default"),
-    //   category: Category(
-    //       id: 'C003',
-    //       title: "Bath & Grooming",
-    //       description: "Monthly Grooming",
-    //       image: "grooming"),
-    //   dateTime: DateTime(2024, 8, 1),
-    // ),
-
-    // Dates on August 6, 2024
     Tracker(
       id: 'T004',
       pet: Pet(id: 'P001', name: "Lumi", image: "lumi"),
@@ -56,20 +45,8 @@ class ScheduleViewModel extends ChangeNotifier {
           title: "Tick & Flea Check",
           description: "Monthly Checkup",
           image: "flea"),
-      dateTime: DateTime(2024, 8, 6),
+      dateTime: DateTime.now(),
     ),
-
-    // Dates after August 6, 2024
-    // Tracker(
-    //   id: 'T006',
-    //   pet: Pet(id: 'P003', name: "Flamingo", image: "default"),
-    //   category: Category(
-    //       id: 'C006',
-    //       title: "Bath & Grooming",
-    //       description: "Quarterly Grooming",
-    //       image: "grooming"),
-    //   dateTime: DateTime(2024, 8, 10),
-    // ),
     Tracker(
       id: 'T007',
       pet: Pet(id: 'P001', name: "Lumi", image: "lumi"),
@@ -103,22 +80,63 @@ class ScheduleViewModel extends ChangeNotifier {
     ),
   ];
 
+  // Filter Controller
+
   Pet _activePet = Pet(id: '000', name: 'null', image: 'null');
 
-  void setActivePet(Pet pet) {
+  Pet get activePet => _activePet;
+  set activePet(Pet pet) {
     _activePet = pet;
     notifyListeners();
   }
 
-  Pet getActivePet() {
-    return _activePet;
+  // Form Controller
+
+  Pet _selectedPet = Pet(id: '000', name: 'null', image: 'null');
+  Category _selectedCategory =
+      Category(id: '000', title: 'null', description: 'null', image: 'null');
+  DateTime _selectedDateTime = DateTime.now();
+  String _selectedFrequency = "One Time";
+
+  Pet get selectedPet => _selectedPet;
+  set selectedPet(Pet pet) {
+    _selectedPet = pet;
+    notifyListeners();
   }
 
-  List<Tracker> getAllTrackers() {
-    return _trackers;
+  Category get selectedCategory => _selectedCategory;
+  set selectedCategory(Category category) {
+    _selectedCategory = category;
+    notifyListeners();
   }
 
-  List<Tracker> getFilteredTrackersByToday() {
+  DateTime get selectedDateTime => _selectedDateTime;
+  set selectedDateTime(DateTime dateTime) {
+    _selectedDateTime = dateTime;
+    notifyListeners();
+  }
+
+  String get selectedFrequency => _selectedFrequency;
+  set selectedFrequency(String frequency) {
+    _selectedFrequency = frequency;
+    notifyListeners();
+  }
+
+  void addNewTracker() {
+    final newTracker = Tracker(
+        id: const Uuid().toString(),
+        pet: selectedPet,
+        category: selectedCategory,
+        dateTime: selectedDateTime);
+    _trackers.add(newTracker);
+    notifyListeners();
+  }
+
+  // Tracker Controller
+
+  List<Tracker> get allTrackers => _trackers;
+
+  List<Tracker> get trackersByToday {
     final currentDate = DateTime.now();
     return _trackers.where((tracker) {
       return _activePet.id == '000'
@@ -132,7 +150,7 @@ class ScheduleViewModel extends ChangeNotifier {
     }).toList();
   }
 
-  List<Tracker> getFilteredTrackersByUpcoming() {
+  List<Tracker> get trackersByUpcoming {
     final currentDate = DateTime.now();
     final today =
         DateTime(currentDate.year, currentDate.month, currentDate.day);
@@ -145,7 +163,7 @@ class ScheduleViewModel extends ChangeNotifier {
     }).toList();
   }
 
-  List<Tracker> getFilteredTrackersByPast() {
+  List<Tracker> get trackersByPast {
     final currentDate = DateTime.now();
     final today =
         DateTime(currentDate.year, currentDate.month, currentDate.day);

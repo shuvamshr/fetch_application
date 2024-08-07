@@ -43,7 +43,7 @@ class TrackerCard extends StatelessWidget {
                 Text(tracker.category.title, style: cardTitleStyle),
                 Text(tracker.category.description, style: cardSubheadingStyle),
                 const SizedBox(height: 8),
-                Text(DateFormat('h:mma, d MMM yyyy').format(tracker.dateTime),
+                Text(DateFormat('dd MMM yyyy').format(tracker.dateTime),
                     style: cardFootnoteStyle),
               ],
             ),

@@ -2,7 +2,7 @@ import 'package:fetch_application/constants/colors.dart';
 import 'package:fetch_application/constants/icons.dart';
 import 'package:fetch_application/constants/typography.dart';
 import 'package:fetch_application/view_models/pet_view_model.dart';
-import 'package:fetch_application/view_models/schedule_view_model.dart';
+import 'package:fetch_application/view_models/tracker_view_model.dart';
 import 'package:fetch_application/views/schedule/navigations/add_tracker_view.dart';
 import 'package:fetch_application/views/schedule/navigations/schedule_history_view.dart';
 import 'package:fetch_application/views/schedule/widgets/add_tracker_button.dart';
@@ -26,7 +26,7 @@ class _ScheduleViewState extends State<ScheduleView> {
   @override
   Widget build(BuildContext context) {
     final petViewModel = Provider.of<PetViewModel>(context);
-    final scheduleViewModel = Provider.of<ScheduleViewModel>(context);
+    final trackerViewModel = Provider.of<TrackerViewModel>(context);
 
     return Scaffold(
       backgroundColor: appBodyPrimaryBackground,
@@ -45,7 +45,7 @@ class _ScheduleViewState extends State<ScheduleView> {
               context,
               CupertinoPageRoute(
                   builder: (context) => ScheduleHistoryView(
-                      trackers: scheduleViewModel.getFilteredTrackersByPast())),
+                      trackers: trackerViewModel.trackersByPast)),
             ),
           ),
         ],
@@ -53,29 +53,29 @@ class _ScheduleViewState extends State<ScheduleView> {
       body: FetchAppBody(
         children: [
           FilterTabListView(
-            pets: petViewModel.getAllPets(),
-            onTabSelected: (pet) => scheduleViewModel.setActivePet(pet),
-            activePet: scheduleViewModel.getActivePet(),
+            pets: petViewModel.allPets,
+            onTabSelected: (pet) => trackerViewModel.activePet = pet,
+            activePet: trackerViewModel.activePet,
           ),
-          if (scheduleViewModel.getFilteredTrackersByToday().isNotEmpty)
+          if (trackerViewModel.trackersByToday.isNotEmpty)
             TrackerCardListView(
               title:
-                  "For ${petViewModel.getPetName(scheduleViewModel.getActivePet().id)} Today",
-              trackers: scheduleViewModel.getFilteredTrackersByToday(),
+                  "For ${petViewModel.getPetName(trackerViewModel.activePet.id)} Today",
+              trackers: trackerViewModel.trackersByToday,
             ),
-          if (scheduleViewModel.getFilteredTrackersByUpcoming().isNotEmpty)
+          if (trackerViewModel.trackersByUpcoming.isNotEmpty)
             TrackerCardListView(
               title:
-                  "Upcoming For ${petViewModel.getPetName(scheduleViewModel.getActivePet().id)}",
-              trackers: scheduleViewModel.getFilteredTrackersByUpcoming(),
+                  "Upcoming For ${petViewModel.getPetName(trackerViewModel.activePet.id)}",
+              trackers: trackerViewModel.trackersByUpcoming,
             ),
-          if (scheduleViewModel.getFilteredTrackersByToday().isEmpty &&
-              scheduleViewModel.getFilteredTrackersByUpcoming().isEmpty)
+          if (trackerViewModel.trackersByToday.isEmpty &&
+              trackerViewModel.trackersByUpcoming.isEmpty)
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.only(top: 128),
               child: Text(
-                "No Upcoming For ${petViewModel.getPetName(scheduleViewModel.getActivePet().id)}",
+                "No Upcoming For ${petViewModel.getPetName(trackerViewModel.activePet.id)}",
                 style: appBodyNoteStyle,
               ),
             ),
@@ -85,8 +85,7 @@ class _ScheduleViewState extends State<ScheduleView> {
       floatingActionButton: AddTrackerButton(
           onPressed: () => Navigator.push(
                 context,
-                CupertinoPageRoute(
-                    builder: (context) => const AddTrackerView()),
+                CupertinoPageRoute(builder: (context) => AddTrackerView()),
               )),
     );
   }

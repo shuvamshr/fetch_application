@@ -8,9 +8,7 @@ class PetViewModel extends ChangeNotifier {
     Pet(id: 'P003', name: 'Flamingo', image: 'default'),
   ];
 
-  List<Pet> getAllPets() {
-    return _pets;
-  }
+  List<Pet> get allPets => _pets;
 
   String getPetName(String id) {
     if (id == '000') {

@@ -50,3 +50,8 @@ TextStyle formSelectionStyle =
 
 TextStyle buttonTitleStyle =
     circularProminent.copyWith(fontSize: 16, color: buttonPrimaryForeground);
+
+// Picker Token
+
+TextStyle pickerButtonStyle =
+    circularProminent.copyWith(fontSize: 16, color: pickerPrimaryForeground);
