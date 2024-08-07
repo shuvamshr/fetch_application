@@ -6,83 +6,199 @@ import 'package:uuid/uuid.dart';
 
 class TrackerViewModel extends ChangeNotifier {
   final List<Tracker> _trackers = [
-    // Dates before August 6, 2024
     Tracker(
       id: 'T001',
-      pet: Pet(id: 'P001', name: "Lumi", image: "lumi"),
+      pet: Pet(
+          id: 'P001',
+          name: 'Lumi',
+          breed: 'Toy Poodle',
+          gender: 'Female',
+          dateOfBirth: DateTime(2012, 9, 3, 6, 30),
+          deSexed: true,
+          from: 'Pet Store',
+          image: 'lumi'),
       category: Category(
           id: 'C001',
-          title: "Vaccination Dose",
-          description: "Monthly Vaccination",
+          title: "Vet Checkup",
+          description: "Yearly health assessment",
           image: "vaccination"),
-      dateTime: DateTime.now(),
+      dateTime: DateTime(2025, 1, 10, 10, 0),
     ),
     Tracker(
       id: 'T002',
-      pet: Pet(id: 'P002', name: "Yuki", image: "yuki"),
+      pet: Pet(
+          id: 'P002',
+          name: 'Yuki',
+          breed: 'Pomeranian',
+          gender: 'Female',
+          dateOfBirth: DateTime(2015, 10, 30, 6, 30),
+          deSexed: true,
+          from: 'Pet Store',
+          image: 'yuki'),
       category: Category(
           id: 'C002',
-          title: "Tick & Flea Check",
-          description: "Weekly Checkup",
-          image: "flea"),
-      dateTime: DateTime(2024, 7, 30),
+          title: "Vaccinations",
+          description: "Immunization shots",
+          image: "vaccination"),
+      dateTime: DateTime(2025, 2, 15, 14, 0),
+    ),
+    Tracker(
+      id: 'T003',
+      pet: Pet(
+          id: 'P003',
+          name: 'Flamingo',
+          breed: 'Labrador',
+          gender: 'Male',
+          dateOfBirth: DateTime(2015, 12, 3, 6, 30),
+          deSexed: false,
+          from: 'Pet Store',
+          image: 'default'),
+      category: Category(
+          id: 'C003',
+          title: "Dental Checkup",
+          description: "Oral health maintenance",
+          image: "vaccination"),
+      dateTime: DateTime(2025, 3, 20, 9, 0),
     ),
     Tracker(
       id: 'T004',
-      pet: Pet(id: 'P001', name: "Lumi", image: "lumi"),
+      pet: Pet(
+          id: 'P001',
+          name: 'Lumi',
+          breed: 'Toy Poodle',
+          gender: 'Female',
+          dateOfBirth: DateTime(2023, 9, 3, 6, 30),
+          deSexed: true,
+          from: 'Pet Store',
+          image: 'lumi'),
       category: Category(
           id: 'C004',
-          title: "Vaccination Dose",
-          description: "Annual Vaccination",
+          title: "Parasite Control",
+          description: "Prevent fleas and ticks",
           image: "vaccination"),
-      dateTime: DateTime(2024, 8, 6),
+      dateTime: DateTime(2023, 4, 25, 11, 0),
     ),
     Tracker(
       id: 'T005',
-      pet: Pet(id: 'P002', name: "Yuki", image: "yuki"),
+      pet: Pet(
+          id: 'P002',
+          name: 'Yuki',
+          breed: 'Pomeranian',
+          gender: 'Female',
+          dateOfBirth: DateTime(2022, 10, 30, 6, 30),
+          deSexed: true,
+          from: 'Pet Store',
+          image: 'yuki'),
       category: Category(
           id: 'C005',
-          title: "Tick & Flea Check",
-          description: "Monthly Checkup",
-          image: "flea"),
+          title: "Blood Tests",
+          description: "Routine blood analysis",
+          image: "vaccination"),
       dateTime: DateTime.now(),
     ),
     Tracker(
+      id: 'T006',
+      pet: Pet(
+          id: 'P003',
+          name: 'Flamingo',
+          breed: 'Labrador',
+          gender: 'Male',
+          dateOfBirth: DateTime(2019, 12, 3, 6, 30),
+          deSexed: false,
+          from: 'Pet Store',
+          image: 'default'),
+      category: Category(
+          id: 'C006',
+          title: "Spaying/Neutering",
+          description: "Surgical sterilization",
+          image: "vaccination"),
+      dateTime: DateTime(2023, 6, 5, 15, 0),
+    ),
+    Tracker(
       id: 'T007',
-      pet: Pet(id: 'P001', name: "Lumi", image: "lumi"),
+      pet: Pet(
+          id: 'P001',
+          name: 'Lumi',
+          breed: 'Toy Poodle',
+          gender: 'Female',
+          dateOfBirth: DateTime(2012, 9, 3, 6, 30),
+          deSexed: true,
+          from: 'Pet Store',
+          image: 'lumi'),
       category: Category(
           id: 'C007',
-          title: "Vaccination Dose",
-          description: "Quarterly Vaccination",
+          title: "Microchipping",
+          description: "Permanent ID chip",
           image: "vaccination"),
-      dateTime: DateTime(2024, 8, 15),
+      dateTime: DateTime.now(),
     ),
     Tracker(
       id: 'T008',
-      pet: Pet(id: 'P002', name: "Yuki", image: "yuki"),
+      pet: Pet(
+          id: 'P002',
+          name: 'Yuki',
+          breed: 'Pomeranian',
+          gender: 'Female',
+          dateOfBirth: DateTime(2017, 10, 30, 6, 30),
+          deSexed: true,
+          from: 'Pet Store',
+          image: 'yuki'),
       category: Category(
           id: 'C008',
-          title: "Tick & Flea Check",
-          description: "Monthly Checkup",
-          image: "flea"),
-      dateTime: DateTime(2024, 8, 20),
+          title: "Weight & Nutrition",
+          description: "Diet and weight management",
+          image: "vaccination"),
+      dateTime: DateTime(2025, 8, 15, 14, 0),
     ),
-
+    Tracker(
+      id: 'T009',
+      pet: Pet(
+          id: 'P003',
+          name: 'Flamingo',
+          breed: 'Labrador',
+          gender: 'Male',
+          dateOfBirth: DateTime(2019, 12, 3, 6, 30),
+          deSexed: false,
+          from: 'Pet Store',
+          image: 'default'),
+      category: Category(
+          id: 'C009',
+          title: "Senior Dog Care",
+          description: "Care for older dogs",
+          image: "vaccination"),
+      dateTime: DateTime(2025, 9, 20, 9, 0),
+    ),
     Tracker(
       id: 'T010',
-      pet: Pet(id: 'P001', name: "Lumi", image: "lumi"),
+      pet: Pet(
+          id: 'P001',
+          name: 'Lumi',
+          breed: 'Toy Poodle',
+          gender: 'Female',
+          dateOfBirth: DateTime(2012, 9, 3, 6, 30),
+          deSexed: true,
+          from: 'Pet Store',
+          image: 'lumi'),
       category: Category(
           id: 'C010',
-          title: "Vaccination Dose",
-          description: "Biannual Vaccination",
+          title: "Allergy Testing",
+          description: "Identify allergies",
           image: "vaccination"),
-      dateTime: DateTime(2024, 9, 5),
+      dateTime: DateTime.now(),
     ),
   ];
 
   // Filter Controller
 
-  Pet _activePet = Pet(id: '000', name: 'null', image: 'null');
+  Pet _activePet = Pet(
+      id: '000',
+      name: 'null',
+      breed: 'null',
+      gender: 'null',
+      dateOfBirth: DateTime.now(),
+      deSexed: false,
+      from: 'null',
+      image: 'null');
 
   Pet get activePet => _activePet;
   set activePet(Pet pet) {
@@ -92,7 +208,15 @@ class TrackerViewModel extends ChangeNotifier {
 
   // Form Controller
 
-  Pet _selectedPet = Pet(id: '000', name: 'null', image: 'null');
+  Pet _selectedPet = Pet(
+      id: '000',
+      name: 'null',
+      breed: 'null',
+      gender: 'null',
+      dateOfBirth: DateTime.now(),
+      deSexed: false,
+      from: 'null',
+      image: 'null');
   Category _selectedCategory =
       Category(id: '000', title: 'null', description: 'null', image: 'null');
   DateTime _selectedDateTime = DateTime.now();

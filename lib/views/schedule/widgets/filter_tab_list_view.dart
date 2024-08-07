@@ -16,7 +16,15 @@ class FilterTabListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nullPet = Pet(id: '000', name: 'null', image: 'null');
+    final nullPet = Pet(
+        id: '000',
+        name: 'null',
+        breed: 'null',
+        gender: 'null',
+        dateOfBirth: DateTime.now(),
+        deSexed: false,
+        from: 'null',
+        image: 'null');
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: SingleChildScrollView(

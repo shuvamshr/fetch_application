@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 const Color gray_900 = Color(0xFF1B1B1B);
 const Color gray_500 = Color(0xFF79747E);
+const Color gray_400 = Color.fromARGB(255, 155, 155, 155);
 const Color gray_300 = Color(0xFFF3F3F3);
 const Color gray_200 = Color(0xFFE8E7EC);
 const Color gray_100 = Color(0xFFF5F5F7);
@@ -38,4 +39,5 @@ const Color pickerPrimaryForeground = gray_900;
 
 const Color formPrimaryBackground = white;
 const Color formPrimaryForeground = gray_900;
-const Color formSecondaryForeground = gray_300;
+const Color formSecondaryForeground = gray_400;
+const Color formTertiaryForeground = gray_300;

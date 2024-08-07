@@ -45,6 +45,8 @@ TextStyle formLabelStyle =
     circularProminent.copyWith(fontSize: 14, color: formPrimaryForeground);
 TextStyle formSelectionStyle =
     circularRegular.copyWith(fontSize: 14, color: formPrimaryForeground);
+TextStyle formSectionTitleStyle =
+    circularRegular.copyWith(fontSize: 12, color: formSecondaryForeground);
 
 // Card Token
 
