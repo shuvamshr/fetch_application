@@ -27,14 +27,6 @@ class AddTrackerView extends StatelessWidget {
     final petViewModel = Provider.of<PetViewModel>(context);
     final categoryViewModel = Provider.of<CategoryViewModel>(context);
 
-    if (trackerViewModel.selectedPet.id == '000') {
-      trackerViewModel.selectedPet = petViewModel.allPets.first;
-    }
-
-    if (trackerViewModel.selectedCategory.id == '000') {
-      trackerViewModel.selectedCategory = categoryViewModel.allCategories.first;
-    }
-
     return Scaffold(
       backgroundColor: appBodyPrimaryBackground,
       appBar: FetchAppBar(

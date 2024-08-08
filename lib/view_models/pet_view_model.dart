@@ -34,6 +34,10 @@ class PetViewModel extends ChangeNotifier {
 
   List<Pet> get allPets => _pets;
 
+  Pet getPetByID(String id) {
+    return _pets.firstWhere((item) => item.id == id);
+  }
+
   String getPetName(String id) {
     if (id == '000') {
       return "All Pets";

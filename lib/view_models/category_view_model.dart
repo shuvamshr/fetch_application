@@ -56,4 +56,8 @@ class CategoryViewModel extends ChangeNotifier {
   ];
 
   List<Category> get allCategories => _categories;
+
+  Category getCategoryByID(String id) {
+    return _categories.firstWhere((item) => item.id == id);
+  }
 }

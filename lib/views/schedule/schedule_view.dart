@@ -85,7 +85,8 @@ class _ScheduleViewState extends State<ScheduleView> {
       floatingActionButton: AddTrackerButton(
           onPressed: () => Navigator.push(
                 context,
-                CupertinoPageRoute(builder: (context) => AddTrackerView()),
+                CupertinoPageRoute(
+                    builder: (context) => const AddTrackerView()),
               )),
     );
   }

@@ -9,12 +9,7 @@ class ServiceViewModel extends ChangeNotifier {
       id: 'S001',
       title: 'H1N1 Vaccination',
       url: "http://www.google.com",
-      forCategory: Category(
-        id: 'C002',
-        title: "Vaccination Dose",
-        description: "Monthly Vaccination",
-        image: "vaccination",
-      ),
+      categoryID: 'C002',
       forBreed: ['Toy Poodle', 'Pomeranian'],
       forGender: ['Female', 'Male'],
       forDesexed: [false, true],
@@ -24,12 +19,7 @@ class ServiceViewModel extends ChangeNotifier {
       id: 'S002',
       title: 'Annual Checkup',
       url: "http://www.google.com",
-      forCategory: Category(
-        id: 'C001',
-        title: "Vet Checkup",
-        description: "Yearly health assessment",
-        image: "vaccination",
-      ),
+      categoryID: 'C001',
       forBreed: ['Toy Poodle', 'Pomeranian', 'Labrador'],
       forGender: ['Female'],
       forDesexed: [true],
@@ -39,11 +29,7 @@ class ServiceViewModel extends ChangeNotifier {
       id: 'S003',
       title: 'Teeth Cleaning',
       url: "http://www.google.com",
-      forCategory: Category(
-          id: 'C003',
-          title: "Dental Checkup",
-          description: "Oral health maintenance",
-          image: "vaccination"),
+      categoryID: 'C003',
       forBreed: ['Toy Poodle', 'Pomeranian', 'Labrador'],
       forGender: ['Female', 'Male'],
       forDesexed: [false, true],
@@ -53,11 +39,7 @@ class ServiceViewModel extends ChangeNotifier {
       id: 'S004',
       title: 'Parasite Control',
       url: "http://www.google.com",
-      forCategory: Category(
-          id: 'C004',
-          title: "Parasite Control",
-          description: "Prevent fleas and ticks",
-          image: "vaccination"),
+      categoryID: 'C004',
       forBreed: ['Toy Poodle', 'Pomeranian', 'Labrador'],
       forGender: ['Female', 'Male'],
       forDesexed: [false, true],
@@ -67,11 +49,7 @@ class ServiceViewModel extends ChangeNotifier {
       id: 'S005',
       title: 'Routine Blood Tests',
       url: "http://www.google.com",
-      forCategory: Category(
-          id: 'C005',
-          title: "Blood Tests",
-          description: "Routine blood analysis",
-          image: "vaccination"),
+      categoryID: 'C005',
       forBreed: ['Toy Poodle', 'Pomeranian', 'Labrador'],
       forGender: ['Female', 'Male'],
       forDesexed: [false, true],
@@ -83,10 +61,8 @@ class ServiceViewModel extends ChangeNotifier {
     final petAge =
         (DateTime.now().difference(pet.dateOfBirth).inDays / 365).ceil();
 
-    print(petAge);
-
     return _services.where((service) {
-      final matchesCategory = service.forCategory.id == category.id;
+      final matchesCategory = service.categoryID == category.id;
       final matchesBreed = service.forBreed.contains(pet.breed);
       final matchesGender = service.forGender.contains(pet.gender);
       final matchesDesexed = service.forDesexed.contains(pet.deSexed);

@@ -10,10 +10,16 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => TrackerViewModel()),
         ChangeNotifierProvider(create: (_) => PetViewModel()),
         ChangeNotifierProvider(create: (_) => CategoryViewModel()),
         ChangeNotifierProvider(create: (_) => ServiceViewModel()),
+        ChangeNotifierProvider(
+          create: (context) => TrackerViewModel(
+            petViewModel: Provider.of<PetViewModel>(context, listen: false),
+            categoryViewModel:
+                Provider.of<CategoryViewModel>(context, listen: false),
+          ),
+        ),
       ],
       child: const MainApp(),
     ),
