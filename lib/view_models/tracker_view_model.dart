@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:fetch_application/models/category_model.dart';
 import 'package:fetch_application/models/pet_model.dart';
 import 'package:fetch_application/models/tracker_model.dart';
 import 'package:fetch_application/view_models/category_view_model.dart';
 import 'package:fetch_application/view_models/pet_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:uuid/uuid.dart';
 
 class TrackerViewModel extends ChangeNotifier {
@@ -13,70 +16,30 @@ class TrackerViewModel extends ChangeNotifier {
   TrackerViewModel({
     required this.petViewModel,
     required this.categoryViewModel,
-  });
+  }) {
+    loadTracker();
+  }
 
-  final List<Tracker> _trackers = [
-    Tracker(
-      id: 'T001',
-      petID: 'P001',
-      categoryID: 'C001',
-      dateTime: DateTime(2025, 1, 10, 10, 0),
-    ),
-    Tracker(
-      id: 'T002',
-      petID: 'P002',
-      categoryID: 'C002',
-      dateTime: DateTime(2025, 2, 15, 14, 0),
-    ),
-    Tracker(
-      id: 'T003',
-      petID: 'P003',
-      categoryID: 'C003',
-      dateTime: DateTime(2025, 3, 20, 9, 0),
-    ),
-    Tracker(
-      id: 'T004',
-      petID: 'P001',
-      categoryID: 'C004',
-      dateTime: DateTime(2023, 4, 25, 11, 0),
-    ),
-    Tracker(
-      id: 'T005',
-      petID: 'P002',
-      categoryID: 'C005',
-      dateTime: DateTime.now(),
-    ),
-    Tracker(
-      id: 'T006',
-      petID: 'P003',
-      categoryID: 'C006',
-      dateTime: DateTime(2023, 6, 5, 15, 0),
-    ),
-    Tracker(
-      id: 'T007',
-      petID: 'P001',
-      categoryID: 'C007',
-      dateTime: DateTime.now(),
-    ),
-    Tracker(
-      id: 'T008',
-      petID: 'P002',
-      categoryID: 'C008',
-      dateTime: DateTime(2025, 8, 15, 14, 0),
-    ),
-    Tracker(
-      id: 'T009',
-      petID: 'P003',
-      categoryID: 'C009',
-      dateTime: DateTime(2025, 9, 20, 9, 0),
-    ),
-    Tracker(
-      id: 'T010',
-      petID: 'P001',
-      categoryID: 'C010',
-      dateTime: DateTime.now(),
-    ),
-  ];
+  Future<void> initialize() async {
+    await loadTracker();
+  }
+
+  List<Tracker> _trackers = [];
+
+  Future<void> loadTracker() async {
+    try {
+      final jsonString = await rootBundle.loadString('data/tracker_data.json');
+      final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+      final List<dynamic> jsonList = jsonMap['trackers'];
+
+      _trackers = jsonList.map((json) => Tracker.fromJson(json)).toList();
+    } catch (e) {
+      // ignore: avoid_print
+      print("Error loading tracker: $e");
+    } finally {
+      notifyListeners();
+    }
+  }
 
   // Filter Controller
 

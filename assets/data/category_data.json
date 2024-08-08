@@ -1,0 +1,64 @@
+{
+  "categories": [
+    {
+      "id": "C001",
+      "title": "Vet Checkup",
+      "description": "Yearly health assessment",
+      "image": "vaccination"
+    },
+    {
+      "id": "C002",
+      "title": "Vaccinations",
+      "description": "Immunization shots",
+      "image": "vaccination"
+    },
+    {
+      "id": "C003",
+      "title": "Dental Checkup",
+      "description": "Oral health maintenance",
+      "image": "vaccination"
+    },
+    {
+      "id": "C004",
+      "title": "Parasite Control",
+      "description": "Prevent fleas and ticks",
+      "image": "vaccination"
+    },
+    {
+      "id": "C005",
+      "title": "Blood Tests",
+      "description": "Routine blood analysis",
+      "image": "vaccination"
+    },
+    {
+      "id": "C006",
+      "title": "Spaying/Neutering",
+      "description": "Surgical sterilization",
+      "image": "vaccination"
+    },
+    {
+      "id": "C007",
+      "title": "Microchipping",
+      "description": "Permanent ID chip",
+      "image": "vaccination"
+    },
+    {
+      "id": "C008",
+      "title": "Weight & Nutrition",
+      "description": "Diet and weight management",
+      "image": "vaccination"
+    },
+    {
+      "id": "C009",
+      "title": "Senior Dog Care",
+      "description": "Care for older dogs",
+      "image": "vaccination"
+    },
+    {
+      "id": "C010",
+      "title": "Allergy Testing",
+      "description": "Identify allergies",
+      "image": "vaccination"
+    }
+  ]
+}

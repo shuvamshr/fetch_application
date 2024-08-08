@@ -1,36 +1,30 @@
+import 'dart:convert';
+
 import 'package:fetch_application/models/pet_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PetViewModel extends ChangeNotifier {
-  final List<Pet> _pets = [
-    Pet(
-        id: 'P001',
-        name: 'Lumi',
-        breed: 'Toy Poodle',
-        gender: 'Female',
-        dateOfBirth: DateTime(2012, 9, 3, 6, 30),
-        deSexed: true,
-        from: 'Pet Store',
-        image: 'lumi'),
-    Pet(
-        id: 'P002',
-        name: 'Yuki',
-        breed: 'Pomeranian',
-        gender: 'Female',
-        dateOfBirth: DateTime(2017, 10, 30, 6, 30),
-        deSexed: true,
-        from: 'Pet Store',
-        image: 'yuki'),
-    Pet(
-        id: 'P003',
-        name: 'Flamingo',
-        breed: 'Labrador',
-        gender: 'Male',
-        dateOfBirth: DateTime(2019, 12, 3, 6, 30),
-        deSexed: false,
-        from: 'Pet Store',
-        image: 'default'),
-  ];
+  List<Pet> _pets = [];
+
+  PetViewModel() {
+    loadPet();
+  }
+
+  Future<void> loadPet() async {
+    try {
+      final jsonString = await rootBundle.loadString('data/pet_data.json');
+      final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+      final List<dynamic> jsonList = jsonMap['pets'];
+
+      _pets = jsonList.map((json) => Pet.fromJson(json)).toList();
+    } catch (e) {
+      // ignore: avoid_print
+      print("Error loading pet: $e");
+    } finally {
+      notifyListeners();
+    }
+  }
 
   List<Pet> get allPets => _pets;
 

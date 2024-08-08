@@ -18,4 +18,26 @@ class Service {
     required this.forDesexed,
     required this.forAge,
   });
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'url': url,
+        'categoryID': categoryID,
+        'forBreed': forBreed,
+        'forGender': forGender,
+        'forDesexed': forDesexed,
+        'forAge': forAge,
+      };
+
+  static Service fromJson(Map<String, dynamic> json) => Service(
+        id: json['id'],
+        title: json['title'],
+        url: json['url'],
+        categoryID: json['categoryID'],
+        forBreed: List<String>.from(json['forBreed']),
+        forGender: List<String>.from(json['forGender']),
+        forDesexed: List<bool>.from(json['forDesexed']),
+        forAge: List<int>.from(json['forAge']),
+      );
 }

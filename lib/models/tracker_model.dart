@@ -23,4 +23,18 @@ class Tracker {
   Category getCategory(CategoryViewModel categoryViewModel) {
     return categoryViewModel.getCategoryByID(categoryID);
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'petID': petID,
+        'categoryID': categoryID,
+        'dateTime': dateTime.toIso8601String(),
+      };
+
+  static Tracker fromJson(Map<String, dynamic> json) => Tracker(
+        id: json['id'],
+        petID: json['petID'],
+        categoryID: json['categoryID'],
+        dateTime: DateTime.parse(json['dateTime']),
+      );
 }

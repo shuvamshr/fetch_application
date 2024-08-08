@@ -1,0 +1,34 @@
+{
+  "pets": [
+    {
+      "id": "P001",
+      "name": "Lumi",
+      "breed": "Toy Poodle",
+      "gender": "Female",
+      "dateOfBirth": "2012-09-03T06:30:00",
+      "deSexed": true,
+      "from": "Pet Store",
+      "image": "lumi"
+    },
+    {
+      "id": "P002",
+      "name": "Yuki",
+      "breed": "Pomeranian",
+      "gender": "Female",
+      "dateOfBirth": "2017-10-30T06:30:00",
+      "deSexed": true,
+      "from": "Pet Store",
+      "image": "yuki"
+    },
+    {
+      "id": "P003",
+      "name": "Flamingo",
+      "breed": "Labrador",
+      "gender": "Male",
+      "dateOfBirth": "2019-12-03T06:30:00",
+      "deSexed": false,
+      "from": "Pet Store",
+      "image": "default"
+    }
+  ]
+}
