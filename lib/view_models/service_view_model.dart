@@ -9,10 +9,6 @@ import 'package:flutter/services.dart';
 class ServiceViewModel extends ChangeNotifier {
   List<Service> _services = [];
 
-  ServiceViewModel() {
-    loadService();
-  }
-
   Future<void> loadService() async {
     try {
       final jsonString = await rootBundle.loadString('data/service_data.json');

@@ -1,22 +1,23 @@
 import 'package:fetch_application/constants/colors.dart';
 import 'package:fetch_application/constants/icons.dart';
 import 'package:fetch_application/constants/typography.dart';
-import 'package:fetch_application/models/pet_model.dart';
-import 'package:fetch_application/views/schedule/widgets/app_bar.dart';
-import 'package:fetch_application/views/schedule/widgets/app_body.dart';
-import 'package:fetch_application/views/schedule/widgets/form_section.dart';
-import 'package:fetch_application/views/schedule/widgets/option_tile.dart';
+import 'package:fetch_application/models/category_model.dart';
+
+import 'package:fetch_application/views/tracker_view/widgets/app_bar.dart';
+import 'package:fetch_application/views/tracker_view/widgets/app_body.dart';
+import 'package:fetch_application/views/tracker_view/widgets/form_section.dart';
+import 'package:fetch_application/views/tracker_view/widgets/option_tile.dart';
 import 'package:flutter/material.dart';
 
-class PetSelectorView extends StatelessWidget {
-  final List<Pet> pets;
-  final Pet selectedPet;
-  final Function(Pet) onOptionSelected;
+class CategorySelectorView extends StatelessWidget {
+  final List<Category> categories;
+  final Category selectedCategory;
+  final Function(Category) onOptionSelected;
 
-  const PetSelectorView({
+  const CategorySelectorView({
     super.key,
-    required this.pets,
-    required this.selectedPet,
+    required this.categories,
+    required this.selectedCategory,
     required this.onOptionSelected,
   });
 
@@ -29,7 +30,7 @@ class PetSelectorView extends StatelessWidget {
             IconButton(
                 onPressed: () => Navigator.pop(context), icon: leftArrowIcon),
             const Spacer(),
-            Text("Select Pet", style: appBarTitleStyle),
+            Text("Select Category", style: appBarTitleStyle),
             const Spacer(),
           ],
         ),
@@ -37,17 +38,17 @@ class PetSelectorView extends StatelessWidget {
           children: [
             FormSection(
               children: [
-                for (var pet in pets) ...[
+                for (var category in categories) ...[
                   GestureDetector(
                     onTap: () => {
-                      onOptionSelected(pet),
+                      onOptionSelected(category),
                       Navigator.pop(context),
                     },
                     child: OptionTile(
-                      title: pet.name,
-                      type: 'pets',
-                      image: pet.image,
-                      isSelected: selectedPet == pet,
+                      title: category.title,
+                      type: 'category',
+                      image: category.image,
+                      isSelected: selectedCategory == category,
                     ),
                   )
                 ],

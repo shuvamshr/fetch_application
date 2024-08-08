@@ -1,5 +1,5 @@
 import 'package:fetch_application/models/pet_model.dart';
-import 'package:fetch_application/views/schedule/widgets/filter_tab.dart';
+import 'package:fetch_application/views/tracker_view/widgets/filter_tab.dart';
 import 'package:flutter/material.dart';
 
 class FilterTabListView extends StatelessWidget {

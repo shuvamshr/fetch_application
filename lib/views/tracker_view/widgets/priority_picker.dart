@@ -1,25 +1,22 @@
 import 'package:fetch_application/constants/colors.dart';
 import 'package:fetch_application/constants/typography.dart';
-import 'package:fetch_application/views/schedule/widgets/form_tile.dart';
+import 'package:fetch_application/views/tracker_view/widgets/form_tile.dart';
 import 'package:flutter/cupertino.dart';
 
-class FrequencyPicker extends StatelessWidget {
-  final String initialFrequency;
-  final ValueChanged<String> onFrequencySelected;
+class PriorityPicker extends StatelessWidget {
+  final String initialPriority;
+  final ValueChanged<String> onPrioritySelected;
 
-  final List<String> frequencies = [
-    "One Time",
-    "Daily",
-    "Weekly",
-    "Fortnightly",
-    "Monthly",
-    "Yearly"
+  final List<String> priorities = [
+    "Low",
+    "Medium",
+    "High",
   ];
 
-  FrequencyPicker(
+  PriorityPicker(
       {super.key,
-      required this.initialFrequency,
-      required this.onFrequencySelected});
+      required this.initialPriority,
+      required this.onPrioritySelected});
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +33,10 @@ class FrequencyPicker extends StatelessWidget {
                 child: CupertinoPicker(
                   itemExtent: 32.0,
                   onSelectedItemChanged: (val) {
-                    onFrequencySelected(frequencies[val]);
+                    onPrioritySelected(priorities[val]);
                   },
                   children:
-                      frequencies.map((frequency) => Text(frequency)).toList(),
+                      priorities.map((priority) => Text(priority)).toList(),
                 ),
               ),
               // Close the modal
@@ -54,9 +51,9 @@ class FrequencyPicker extends StatelessWidget {
         ),
       ),
       child: FormTile(
-        type: "frequency",
-        label: "Frequency",
-        selection: initialFrequency,
+        type: "priority",
+        label: "Priority",
+        selection: initialPriority,
       ),
     );
   }

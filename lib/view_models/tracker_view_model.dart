@@ -16,13 +16,7 @@ class TrackerViewModel extends ChangeNotifier {
   TrackerViewModel({
     required this.petViewModel,
     required this.categoryViewModel,
-  }) {
-    loadTracker();
-  }
-
-  Future<void> initialize() async {
-    await loadTracker();
-  }
+  });
 
   List<Tracker> _trackers = [];
 
@@ -73,7 +67,7 @@ class TrackerViewModel extends ChangeNotifier {
   Category _selectedCategory =
       Category(id: '000', title: 'null', description: 'null', image: 'null');
   DateTime _selectedDateTime = DateTime.now();
-  String _selectedFrequency = "One Time";
+  String _selectedPriority = "Medium";
 
   Pet get selectedPet =>
       _selectedPet.id != '000' ? _selectedPet : petViewModel.allPets.first;
@@ -96,9 +90,9 @@ class TrackerViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  String get selectedFrequency => _selectedFrequency;
-  set selectedFrequency(String frequency) {
-    _selectedFrequency = frequency;
+  String get selectedPriority => _selectedPriority;
+  set selectedPriority(String priority) {
+    _selectedPriority = priority;
     notifyListeners();
   }
 
@@ -134,7 +128,8 @@ class TrackerViewModel extends ChangeNotifier {
     final currentDate = DateTime.now();
     final today =
         DateTime(currentDate.year, currentDate.month, currentDate.day);
-    return _trackers.where((tracker) {
+
+    final upcomingTrackers = _trackers.where((tracker) {
       final trackerDate = DateTime(
           tracker.dateTime.year, tracker.dateTime.month, tracker.dateTime.day);
       return _activePet.id == '000'
@@ -142,16 +137,27 @@ class TrackerViewModel extends ChangeNotifier {
           : tracker.getPet(petViewModel).id == _activePet.id &&
               trackerDate.isAfter(today);
     }).toList();
+
+    // Sort the list by date in ascending order (oldest first)
+    upcomingTrackers.sort((a, b) => a.dateTime.compareTo(b.dateTime));
+
+    return upcomingTrackers;
   }
 
   List<Tracker> get trackersByPast {
     final currentDate = DateTime.now();
     final today =
         DateTime(currentDate.year, currentDate.month, currentDate.day);
-    return _trackers.where((tracker) {
+
+    final pastTrackers = _trackers.where((tracker) {
       final trackerDate = DateTime(
           tracker.dateTime.year, tracker.dateTime.month, tracker.dateTime.day);
       return trackerDate.isBefore(today);
     }).toList();
+
+    // Sort the list by date in ascending order (oldest first)
+    pastTrackers.sort((a, b) => a.dateTime.compareTo(b.dateTime));
+
+    return pastTrackers;
   }
 }

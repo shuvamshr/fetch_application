@@ -4,15 +4,15 @@ import 'package:fetch_application/constants/typography.dart';
 import 'package:fetch_application/view_models/category_view_model.dart';
 import 'package:fetch_application/view_models/pet_view_model.dart';
 import 'package:fetch_application/view_models/tracker_view_model.dart';
-import 'package:fetch_application/views/schedule/navigations/category_selector_view.dart';
-import 'package:fetch_application/views/schedule/navigations/pet_selector_view.dart';
-import 'package:fetch_application/views/schedule/widgets/app_bar.dart';
-import 'package:fetch_application/views/schedule/widgets/app_body.dart';
-import 'package:fetch_application/views/schedule/widgets/date_picker.dart';
-import 'package:fetch_application/views/schedule/widgets/form_section.dart';
-import 'package:fetch_application/views/schedule/widgets/form_tile.dart';
-import 'package:fetch_application/views/schedule/widgets/frequency_picker.dart';
-import 'package:fetch_application/views/schedule/widgets/primary_button.dart';
+import 'package:fetch_application/views/tracker_view/routes/category_selector_view.dart';
+import 'package:fetch_application/views/tracker_view/routes/pet_selector_view.dart';
+import 'package:fetch_application/views/tracker_view/widgets/app_bar.dart';
+import 'package:fetch_application/views/tracker_view/widgets/app_body.dart';
+import 'package:fetch_application/views/tracker_view/widgets/date_picker.dart';
+import 'package:fetch_application/views/tracker_view/widgets/form_section.dart';
+import 'package:fetch_application/views/tracker_view/widgets/form_tile.dart';
+import 'package:fetch_application/views/tracker_view/widgets/priority_picker.dart';
+import 'package:fetch_application/views/tracker_view/widgets/primary_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,9 +23,9 @@ class AddTrackerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trackerViewModel = Provider.of<TrackerViewModel>(context);
-    final petViewModel = Provider.of<PetViewModel>(context);
-    final categoryViewModel = Provider.of<CategoryViewModel>(context);
+    final trackerViewModel = context.watch<TrackerViewModel>();
+    final petViewModel = context.watch<PetViewModel>();
+    final categoryViewModel = context.watch<CategoryViewModel>();
 
     return Scaffold(
       backgroundColor: appBodyPrimaryBackground,
@@ -106,10 +106,10 @@ class AddTrackerView extends StatelessWidget {
                 onDateSelected: (date) =>
                     trackerViewModel.selectedDateTime = date,
               ),
-              FrequencyPicker(
-                initialFrequency: trackerViewModel.selectedFrequency,
-                onFrequencySelected: (frequency) =>
-                    trackerViewModel.selectedFrequency = frequency,
+              PriorityPicker(
+                initialPriority: trackerViewModel.selectedPriority,
+                onPrioritySelected: (priority) =>
+                    trackerViewModel.selectedPriority = priority,
               ),
             ],
           ),

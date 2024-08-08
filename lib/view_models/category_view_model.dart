@@ -7,10 +7,6 @@ import 'package:flutter/services.dart';
 class CategoryViewModel extends ChangeNotifier {
   List<Category> _categories = [];
 
-  CategoryViewModel() {
-    loadCategory();
-  }
-
   Future<void> loadCategory() async {
     try {
       final jsonString = await rootBundle.loadString('data/category_data.json');

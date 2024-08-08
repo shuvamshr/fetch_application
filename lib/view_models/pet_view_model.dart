@@ -7,10 +7,6 @@ import 'package:flutter/services.dart';
 class PetViewModel extends ChangeNotifier {
   List<Pet> _pets = [];
 
-  PetViewModel() {
-    loadPet();
-  }
-
   Future<void> loadPet() async {
     try {
       final jsonString = await rootBundle.loadString('data/pet_data.json');
