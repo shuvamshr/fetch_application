@@ -30,14 +30,14 @@ class Pet {
         'image': image,
       };
 
-  static Pet fromJson(Map<String, dynamic> json) => Pet(
-        id: json['id'],
-        name: json['name'],
-        breed: json['breed'],
-        gender: json['gender'],
-        dateOfBirth: DateTime.parse(json['dateOfBirth']),
-        deSexed: json['deSexed'],
-        from: json['from'],
-        image: json['image'],
+  factory Pet.fromJson(Map<String, dynamic> json) => Pet(
+        id: json["id"],
+        name: json["name"],
+        breed: json["breed"],
+        gender: json["gender"],
+        dateOfBirth: DateTime.parse(json["dateOfBirth"]),
+        deSexed: json["deSexed"],
+        from: json["from"],
+        image: json["image"],
       );
 }

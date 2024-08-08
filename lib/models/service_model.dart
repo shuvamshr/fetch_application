@@ -30,7 +30,7 @@ class Service {
         'forAge': forAge,
       };
 
-  static Service fromJson(Map<String, dynamic> json) => Service(
+  factory Service.fromJson(Map<String, dynamic> json) => Service(
         id: json['id'],
         title: json['title'],
         url: json['url'],

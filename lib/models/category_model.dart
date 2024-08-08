@@ -18,7 +18,7 @@ class Category {
         'image': image,
       };
 
-  static Category fromJson(Map<String, dynamic> json) => Category(
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
         id: json['id'],
         title: json['title'],
         description: json['description'],

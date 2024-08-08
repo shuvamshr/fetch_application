@@ -31,7 +31,7 @@ class Tracker {
         'dateTime': dateTime.toIso8601String(),
       };
 
-  static Tracker fromJson(Map<String, dynamic> json) => Tracker(
+  factory Tracker.fromJson(Map<String, dynamic> json) => Tracker(
         id: json['id'],
         petID: json['petID'],
         categoryID: json['categoryID'],
