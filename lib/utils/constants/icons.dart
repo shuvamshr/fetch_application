@@ -30,3 +30,15 @@ const Icon addIcon = Icon(
   color: white,
   size: 32,
 );
+
+const Icon editIcon = Icon(
+  Icons.edit_note,
+  color: gray_900,
+  size: 24,
+);
+
+const Icon deleteIcon = Icon(
+  Icons.delete_forever,
+  color: red_600,
+  size: 24,
+);
