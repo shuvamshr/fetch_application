@@ -1,4 +1,4 @@
-import 'package:fetch_application/constants/colors.dart';
+import 'package:fetch_application/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 // Typography Primitives

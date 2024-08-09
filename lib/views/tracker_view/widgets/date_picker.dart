@@ -1,5 +1,5 @@
-import 'package:fetch_application/constants/colors.dart';
-import 'package:fetch_application/constants/typography.dart';
+import 'package:fetch_application/utils/constants/colors.dart';
+import 'package:fetch_application/utils/constants/typography.dart';
 import 'package:fetch_application/views/tracker_view/widgets/form_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';

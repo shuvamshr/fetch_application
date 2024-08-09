@@ -1,5 +1,5 @@
-import 'package:fetch_application/constants/colors.dart';
-import 'package:fetch_application/constants/icons.dart';
+import 'package:fetch_application/utils/constants/colors.dart';
+import 'package:fetch_application/utils/constants/icons.dart';
 import 'package:flutter/material.dart';
 
 class AddTrackerButton extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:fetch_application/constants/typography.dart';
+import 'package:fetch_application/utils/constants/typography.dart';
 import 'package:fetch_application/models/tracker_model.dart';
 import 'package:fetch_application/views/tracker_view/routes/tracker_detail_view.dart';
 import 'package:fetch_application/views/tracker_view/widgets/tracker_card.dart';

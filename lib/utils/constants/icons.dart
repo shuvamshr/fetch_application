@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fetch_application/constants/colors.dart';
+import 'package:fetch_application/utils/constants/colors.dart';
 
 const Icon leftArrowIcon = Icon(
   Icons.chevron_left,

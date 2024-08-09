@@ -1,5 +1,5 @@
-import 'package:fetch_application/constants/colors.dart';
-import 'package:fetch_application/constants/typography.dart';
+import 'package:fetch_application/utils/constants/colors.dart';
+import 'package:fetch_application/utils/constants/typography.dart';
 import 'package:flutter/material.dart';
 
 class FormSection extends StatelessWidget {

@@ -1,6 +1,6 @@
-import 'package:fetch_application/constants/colors.dart';
-import 'package:fetch_application/constants/icons.dart';
-import 'package:fetch_application/constants/typography.dart';
+import 'package:fetch_application/utils/constants/colors.dart';
+import 'package:fetch_application/utils/constants/icons.dart';
+import 'package:fetch_application/utils/constants/typography.dart';
 import 'package:fetch_application/models/pet_model.dart';
 import 'package:fetch_application/views/tracker_view/widgets/app_bar.dart';
 import 'package:fetch_application/views/tracker_view/widgets/app_body.dart';
