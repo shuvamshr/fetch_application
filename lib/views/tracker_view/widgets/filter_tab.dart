@@ -13,7 +13,7 @@ class FilterTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 40,
-      padding: EdgeInsets.only(left: pet.id != '000' ? 8 : 12, right: 12),
+      padding: EdgeInsets.only(left: pet.id != 'null' ? 8 : 12, right: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(999),
         color: isActive
@@ -23,7 +23,7 @@ class FilterTab extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          if (pet.id != '000') ...[
+          if (pet.id != 'null') ...[
             CircleAvatar(
               radius: 28 / 2,
               backgroundImage: AssetImage('images/pets/${pet.image}.png'),
@@ -31,7 +31,7 @@ class FilterTab extends StatelessWidget {
             const SizedBox(width: 8),
           ],
           Text(
-            pet.id != '000' ? pet.name : "All Pets",
+            pet.id != 'null' ? pet.name : "All Pets",
             style: isActive
                 ? filterTabTitleActiveStyle
                 : filterTabTitleInactiveStyle,

@@ -1,7 +1,5 @@
 import 'package:fetch_application/models/category_model.dart';
 import 'package:fetch_application/models/pet_model.dart';
-import 'package:fetch_application/view_models/category_view_model.dart';
-import 'package:fetch_application/view_models/pet_view_model.dart';
 
 class Tracker {
   final String id;
@@ -16,14 +14,6 @@ class Tracker {
     required this.dateTime,
   });
 
-  Pet getPet(PetViewModel petViewModel) {
-    return petViewModel.getPetByID(petID);
-  }
-
-  Category getCategory(CategoryViewModel categoryViewModel) {
-    return categoryViewModel.getCategoryByID(categoryID);
-  }
-
   Map<String, dynamic> toJson() => {
         'id': id,
         'petID': petID,
@@ -37,4 +27,12 @@ class Tracker {
         categoryID: json['categoryID'],
         dateTime: DateTime.parse(json['dateTime']),
       );
+
+  Pet getPet(List<Pet> pets) {
+    return pets.firstWhere((item) => item.id == petID);
+  }
+
+  Category getCategory(List<Category> categories) {
+    return categories.firstWhere((item) => item.id == categoryID);
+  }
 }

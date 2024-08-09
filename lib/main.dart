@@ -1,5 +1,9 @@
+import 'package:fetch_application/repositories/category_repository.dart';
+import 'package:fetch_application/repositories/pet_repository.dart';
+import 'package:fetch_application/repositories/service_repository.dart';
+import 'package:fetch_application/repositories/tracker_repository.dart';
 import 'package:fetch_application/view_models/category_view_model.dart';
-import 'package:fetch_application/view_models/pet_view_model.dart';
+
 import 'package:fetch_application/view_models/service_view_model.dart';
 import 'package:fetch_application/view_models/tracker_view_model.dart';
 import 'package:fetch_application/views/tracker_view/tracker_view.dart';
@@ -8,17 +12,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  final trackerRepository = TrackerRepository();
+  final petRepository = PetRepository();
+  final categoryRepository = CategoryRepository();
+  final serviceRepository = ServiceRepository();
+
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => PetViewModel()),
-        ChangeNotifierProvider(create: (_) => CategoryViewModel()),
-        ChangeNotifierProvider(create: (_) => ServiceViewModel()),
         ChangeNotifierProvider(
           create: (context) => TrackerViewModel(
-            petViewModel: Provider.of<PetViewModel>(context, listen: false),
-            categoryViewModel:
-                Provider.of<CategoryViewModel>(context, listen: false),
+            trackerRepository,
+            petRepository,
+            categoryRepository,
+            serviceRepository,
           ),
         ),
       ],
@@ -30,19 +37,12 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-  Future<void> loadData(BuildContext context) async {
+  Future<void> simulateLoading(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 4));
-    final petViewModel = context.read<PetViewModel>();
-    final trackerViewModel = context.read<TrackerViewModel>();
-    final categoryViewModel = context.read<CategoryViewModel>();
-    final serviceViewModel = context.read<ServiceViewModel>();
 
-    await Future.wait([
-      petViewModel.loadPet(),
-      trackerViewModel.loadTracker(),
-      categoryViewModel.loadCategory(),
-      serviceViewModel.loadService()
-    ]);
+    final trackerViewModel = context.read<TrackerViewModel>();
+
+    await Future.wait([trackerViewModel.updateData()]);
   }
 
   @override
@@ -51,7 +51,7 @@ class MainApp extends StatelessWidget {
       title: 'Fetch App',
       debugShowCheckedModeBanner: false,
       home: FutureBuilder<void>(
-          future: loadData(context),
+          future: simulateLoading(context),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Text('Error loading data: ${snapshot.error}');

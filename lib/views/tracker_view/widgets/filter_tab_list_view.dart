@@ -16,15 +16,7 @@ class FilterTabListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nullPet = Pet(
-        id: '000',
-        name: 'null',
-        breed: 'null',
-        gender: 'null',
-        dateOfBirth: DateTime.now(),
-        deSexed: false,
-        from: 'null',
-        image: 'null');
+    final allPets = Pet.nullValue();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: SingleChildScrollView(
@@ -34,10 +26,10 @@ class FilterTabListView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             GestureDetector(
-              onTap: () => onTabSelected(nullPet),
+              onTap: () => onTabSelected(allPets),
               child: FilterTab(
-                pet: nullPet,
-                isActive: activePet.id == nullPet.id,
+                pet: allPets,
+                isActive: activePet.id == allPets.id,
               ),
             ),
             for (var pet in pets)

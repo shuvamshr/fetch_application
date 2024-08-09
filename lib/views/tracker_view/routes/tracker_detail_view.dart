@@ -2,9 +2,8 @@ import 'package:fetch_application/utils/constants/colors.dart';
 import 'package:fetch_application/utils/constants/icons.dart';
 import 'package:fetch_application/utils/constants/typography.dart';
 import 'package:fetch_application/models/tracker_model.dart';
-import 'package:fetch_application/view_models/category_view_model.dart';
-import 'package:fetch_application/view_models/pet_view_model.dart';
-import 'package:fetch_application/view_models/service_view_model.dart';
+
+import 'package:fetch_application/view_models/tracker_view_model.dart';
 import 'package:fetch_application/views/tracker_view/widgets/app_bar.dart';
 import 'package:fetch_application/views/tracker_view/widgets/app_body.dart';
 import 'package:fetch_application/views/tracker_view/widgets/form_link_tile.dart';
@@ -22,12 +21,11 @@ class TrackerDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final petViewModel = Provider.of<PetViewModel>(context);
-    final categoryViewModel = Provider.of<CategoryViewModel>(context);
-    final serviceViewModel = Provider.of<ServiceViewModel>(context);
+    final trackerViewModel = Provider.of<TrackerViewModel>(context);
 
-    final tailoredServices = serviceViewModel.getTailoredServices(
-        tracker.getPet(petViewModel), tracker.getCategory(categoryViewModel));
+    final tailoredServices = trackerViewModel.getRecommendedServices(
+        tracker.getPet(trackerViewModel.allPets),
+        tracker.getCategory(trackerViewModel.allCategories));
 
     return Scaffold(
       backgroundColor: appBodyPrimaryBackground,
@@ -39,7 +37,7 @@ class TrackerDetailView extends StatelessWidget {
           ),
           const Spacer(),
           Text(
-              "${tracker.getCategory(categoryViewModel).title} For ${tracker.getPet(petViewModel).name}",
+              "${tracker.getCategory(trackerViewModel.allCategories).title} For ${tracker.getPet(trackerViewModel.allPets).name}",
               style: appBarTitleStyle),
           const Spacer(),
         ],
@@ -52,15 +50,17 @@ class TrackerDetailView extends StatelessWidget {
               FormTile(
                 type: 'pets',
                 label: 'Pet',
-                selection: tracker.getPet(petViewModel).name,
-                image: tracker.getPet(petViewModel).image,
+                selection: tracker.getPet(trackerViewModel.allPets).name,
+                image: tracker.getPet(trackerViewModel.allPets).image,
                 readOnly: true,
               ),
               FormTile(
                 type: 'category',
                 label: 'Category',
-                selection: tracker.getCategory(categoryViewModel).title,
-                image: tracker.getCategory(categoryViewModel).image,
+                selection:
+                    tracker.getCategory(trackerViewModel.allCategories).title,
+                image:
+                    tracker.getCategory(trackerViewModel.allCategories).image,
                 readOnly: true,
               ),
               FormTile(
@@ -72,7 +72,9 @@ class TrackerDetailView extends StatelessWidget {
               FormTile(
                 type: 'frequency',
                 label: 'Frequency',
-                selection: tracker.getCategory(categoryViewModel).description,
+                selection: tracker
+                    .getCategory(trackerViewModel.allCategories)
+                    .description,
                 readOnly: true,
               ),
             ],

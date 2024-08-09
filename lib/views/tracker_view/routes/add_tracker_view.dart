@@ -1,8 +1,7 @@
 import 'package:fetch_application/utils/constants/colors.dart';
 import 'package:fetch_application/utils/constants/icons.dart';
 import 'package:fetch_application/utils/constants/typography.dart';
-import 'package:fetch_application/view_models/category_view_model.dart';
-import 'package:fetch_application/view_models/pet_view_model.dart';
+
 import 'package:fetch_application/view_models/tracker_view_model.dart';
 import 'package:fetch_application/views/tracker_view/routes/category_selector_view.dart';
 import 'package:fetch_application/views/tracker_view/routes/pet_selector_view.dart';
@@ -24,8 +23,6 @@ class AddTrackerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final trackerViewModel = context.watch<TrackerViewModel>();
-    final petViewModel = context.watch<PetViewModel>();
-    final categoryViewModel = context.watch<CategoryViewModel>();
 
     return Scaffold(
       backgroundColor: appBodyPrimaryBackground,
@@ -49,22 +46,16 @@ class AddTrackerView extends StatelessWidget {
                   context,
                   CupertinoPageRoute(
                       builder: (context) => PetSelectorView(
-                          pets: petViewModel.allPets,
-                          selectedPet: trackerViewModel.selectedPet.id == '000'
-                              ? petViewModel.allPets.first
-                              : trackerViewModel.selectedPet,
+                          pets: trackerViewModel.allPets,
+                          selectedPet: trackerViewModel.selectedPet,
                           onOptionSelected: (pet) =>
                               trackerViewModel.selectedPet = pet)),
                 ),
                 child: FormTile(
                   type: "pets",
                   label: "Pet",
-                  selection: trackerViewModel.selectedPet.id == '000'
-                      ? petViewModel.allPets.first.name
-                      : trackerViewModel.selectedPet.name,
-                  image: trackerViewModel.selectedPet.id == '000'
-                      ? petViewModel.allPets.first.image
-                      : trackerViewModel.selectedPet.image,
+                  selection: trackerViewModel.selectedPet.name,
+                  image: trackerViewModel.selectedPet.image,
                 ),
               ),
             ],
@@ -77,23 +68,16 @@ class AddTrackerView extends StatelessWidget {
                   context,
                   CupertinoPageRoute(
                       builder: (context) => CategorySelectorView(
-                          categories: categoryViewModel.allCategories,
-                          selectedCategory:
-                              trackerViewModel.selectedCategory.id == '000'
-                                  ? categoryViewModel.allCategories.first
-                                  : trackerViewModel.selectedCategory,
+                          categories: trackerViewModel.allCategories,
+                          selectedCategory: trackerViewModel.selectedCategory,
                           onOptionSelected: (category) =>
                               trackerViewModel.selectedCategory = category)),
                 ),
                 child: FormTile(
                   type: "category",
                   label: "Category",
-                  selection: trackerViewModel.selectedCategory.id == '000'
-                      ? categoryViewModel.allCategories.first.title
-                      : trackerViewModel.selectedCategory.title,
-                  image: trackerViewModel.selectedCategory.id == '000'
-                      ? categoryViewModel.allCategories.first.image
-                      : trackerViewModel.selectedCategory.image,
+                  selection: trackerViewModel.selectedCategory.title,
+                  image: trackerViewModel.selectedCategory.image,
                 ),
               ),
             ],
