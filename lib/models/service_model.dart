@@ -1,6 +1,8 @@
 class Service {
   final String id;
   final String title;
+  final String description;
+  final String image;
   final String url;
   final String categoryID;
   final List<String> forBreed;
@@ -11,6 +13,8 @@ class Service {
   Service({
     required this.id,
     required this.title,
+    required this.description,
+    required this.image,
     required this.url,
     required this.categoryID,
     required this.forBreed,
@@ -22,6 +26,8 @@ class Service {
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
+        'description': description,
+        'image': image,
         'url': url,
         'categoryID': categoryID,
         'forBreed': forBreed,
@@ -33,6 +39,8 @@ class Service {
   factory Service.fromJson(Map<String, dynamic> json) => Service(
         id: json['id'],
         title: json['title'],
+        description: json['description'],
+        image: json['image'],
         url: json['url'],
         categoryID: json['categoryID'],
         forBreed: List<String>.from(json['forBreed']),

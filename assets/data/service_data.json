@@ -3,6 +3,8 @@
     {
       "id": "S001",
       "title": "H1N1 Vaccination",
+      "description": "Description goes here",
+      "image": "zoetis",
       "url": "http://www.google.com",
       "categoryID": "C002",
       "forBreed": ["Toy Poodle", "Pomeranian"],
@@ -13,6 +15,8 @@
     {
       "id": "S002",
       "title": "Annual Checkup",
+      "description": "Description goes here",
+      "image": "zoetis",
       "url": "http://www.google.com",
       "categoryID": "C001",
       "forBreed": ["Toy Poodle", "Pomeranian", "Labrador"],
@@ -23,6 +27,8 @@
     {
       "id": "S003",
       "title": "Teeth Cleaning",
+      "description": "Description goes here",
+      "image": "zoetis",
       "url": "http://www.google.com",
       "categoryID": "C003",
       "forBreed": ["Toy Poodle", "Pomeranian", "Labrador"],
@@ -33,6 +39,8 @@
     {
       "id": "S004",
       "title": "Parasite Control",
+      "description": "Description goes here",
+      "image": "zoetis",
       "url": "http://www.google.com",
       "categoryID": "C004",
       "forBreed": ["Toy Poodle", "Pomeranian", "Labrador"],
@@ -43,12 +51,38 @@
     {
       "id": "S005",
       "title": "Routine Blood Tests",
+      "description": "Description goes here",
+      "image": "zoetis",
       "url": "http://www.google.com",
       "categoryID": "C005",
       "forBreed": ["Toy Poodle", "Pomeranian", "Labrador"],
       "forGender": ["Female", "Male"],
       "forDesexed": [false, true],
       "forAge": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    },
+    {
+      "id": "S006",
+      "title": "Annual Checkup",
+      "description": "Description goes here",
+      "image": "zoetis",
+      "url": "http://www.google.com",
+      "categoryID": "C001",
+      "forBreed": ["Toy Poodle", "Pomeranian", "Labrador"],
+      "forGender": ["Female"],
+      "forDesexed": [true],
+      "forAge": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    },
+    {
+      "id": "S007",
+      "title": "Annual Checkup",
+      "description": "Description goes here",
+      "image": "zoetis",
+      "url": "http://www.google.com",
+      "categoryID": "C001",
+      "forBreed": ["Toy Poodle", "Pomeranian", "Labrador"],
+      "forGender": ["Female"],
+      "forDesexed": [true],
+      "forAge": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     }
   ]
 }
