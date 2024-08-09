@@ -41,7 +41,7 @@ class TrackerDetailView extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              "${tracker.getCategory(trackerViewModel.allCategories).title} For ${tracker.getPet(trackerViewModel.allPets).name}",
+              tracker.getCategory(trackerViewModel.allCategories).title,
               style: appBarTitleStyle,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
