@@ -1,30 +1,30 @@
-import 'dart:convert';
-
 import 'package:fetch_application/models/category_model.dart';
+import 'package:fetch_application/repositories/category_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class CategoryViewModel extends ChangeNotifier {
+  final CategoryRepository _categoryRepository;
   List<Category> _categories = [];
 
-  Future<void> loadCategory() async {
-    try {
-      final jsonString = await rootBundle.loadString('data/category_data.json');
-      final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
-      final List<dynamic> jsonList = jsonMap['categories'];
+  CategoryViewModel(this._categoryRepository);
 
-      _categories = jsonList.map((json) => Category.fromJson(json)).toList();
-    } catch (e) {
-      // ignore: avoid_print
-      print("Error loading category: $e");
-    } finally {
-      notifyListeners();
-    }
+  Future<void> updateData() async {
+    _categories = await _categoryRepository.fetchCategories();
+    notifyListeners();
   }
 
-  List<Category> get allCategories => _categories;
+  void addPet(Category pet) async {
+    await _categoryRepository.addCategory(pet);
+    updateData();
+  }
 
-  Category getCategoryByID(String id) {
-    return _categories.firstWhere((item) => item.id == id);
+  void updatePet(Category pet) async {
+    await _categoryRepository.updateCategory(pet);
+    updateData();
+  }
+
+  void deletePet(String id) async {
+    await _categoryRepository.deleteCategory(id);
+    updateData();
   }
 }

@@ -1,39 +1,33 @@
 import 'dart:convert';
 
 import 'package:fetch_application/models/pet_model.dart';
+import 'package:fetch_application/repositories/pet_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class PetViewModel extends ChangeNotifier {
+  final PetRepository _petRepository;
   List<Pet> _pets = [];
 
-  Future<void> loadPet() async {
-    try {
-      final jsonString = await rootBundle.loadString('data/pet_data.json');
-      final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
-      final List<dynamic> jsonList = jsonMap['pets'];
+  PetViewModel(this._petRepository);
 
-      _pets = jsonList.map((json) => Pet.fromJson(json)).toList();
-    } catch (e) {
-      // ignore: avoid_print
-      print("Error loading pet: $e");
-    } finally {
-      notifyListeners();
-    }
+  Future<void> updateData() async {
+    _pets = await _petRepository.fetchPets();
+    notifyListeners();
   }
 
-  List<Pet> get allPets => _pets;
-
-  Pet getPetByID(String id) {
-    return _pets.firstWhere((item) => item.id == id);
+  void addPet(Pet pet) async {
+    await _petRepository.addPet(pet);
+    updateData();
   }
 
-  String getPetName(String id) {
-    if (id == '000') {
-      return "All Pets";
-    } else {
-      var pet = _pets.firstWhere((item) => item.id == id);
-      return pet.name;
-    }
+  void updatePet(Pet pet) async {
+    await _petRepository.updatePet(pet);
+    updateData();
+  }
+
+  void deletePet(String id) async {
+    await _petRepository.deletePet(id);
+    updateData();
   }
 }
