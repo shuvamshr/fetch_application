@@ -6,12 +6,14 @@ class Tracker {
   final String petID;
   final String categoryID;
   final DateTime dateTime;
+  final String priority;
 
   Tracker({
     required this.id,
     required this.petID,
     required this.categoryID,
     required this.dateTime,
+    required this.priority,
   });
 
   Map<String, dynamic> toJson() => {
@@ -26,6 +28,7 @@ class Tracker {
         petID: json['petID'],
         categoryID: json['categoryID'],
         dateTime: DateTime.parse(json['dateTime']),
+        priority: json['priority'],
       );
 
   Pet getPet(List<Pet> pets) {
