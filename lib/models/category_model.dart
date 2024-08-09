@@ -24,4 +24,13 @@ class Category {
         description: json['description'],
         image: json['image'],
       );
+
+  factory Category.nullValue() {
+    return Category(
+      id: 'null',
+      title: 'null',
+      description: 'null',
+      image: 'null',
+    );
+  }
 }

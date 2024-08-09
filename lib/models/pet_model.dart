@@ -40,4 +40,17 @@ class Pet {
         from: json["from"],
         image: json["image"],
       );
+
+  factory Pet.nullValue() {
+    return Pet(
+      id: 'null',
+      name: 'All Pets',
+      breed: 'null',
+      gender: 'null',
+      dateOfBirth: DateTime.now(),
+      deSexed: false,
+      from: 'null',
+      image: 'null',
+    );
+  }
 }
