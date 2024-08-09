@@ -11,6 +11,8 @@ const Color gray_100 = Color(0xFFF5F5F7);
 
 const Color green_500 = Color(0xFF0A9D62);
 
+const Color red_600 = Color(0xFFEA3323);
+
 const Color black = Color(0xFF000000);
 const Color white = Color(0xFFFFFFFF);
 
