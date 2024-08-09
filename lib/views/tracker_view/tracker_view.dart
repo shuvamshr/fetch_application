@@ -31,9 +31,15 @@ class TrackerView extends StatelessWidget {
             icon: leftArrowIcon,
             onPressed: () => {},
           ),
-          const Spacer(),
-          Text("Schedule", style: appBarTitleStyle),
-          const Spacer(),
+          Expanded(
+            child: Text(
+              "Schedule Tracker",
+              style: appBarTitleStyle,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              textAlign: TextAlign.center,
+            ),
+          ),
           IconButton(
             icon: historyIcon,
             onPressed: () => Navigator.push(

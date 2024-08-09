@@ -45,20 +45,30 @@ class TrackerCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(tracker.getCategory(trackerViewModel.allCategories).title,
-                    style: cardTitleStyle),
                 Text(
-                    tracker
-                        .getCategory(trackerViewModel.allCategories)
-                        .description,
-                    style: cardSubheadingStyle),
+                  tracker.getCategory(trackerViewModel.allCategories).title,
+                  style: cardTitleStyle,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                Text(
+                  tracker
+                      .getCategory(trackerViewModel.allCategories)
+                      .description,
+                  style: cardSubheadingStyle,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
                 const SizedBox(height: 8),
-                Text(DateFormat('dd MMM yyyy').format(tracker.dateTime),
-                    style: cardFootnoteStyle),
+                Text(
+                  DateFormat('dd MMM yyyy').format(tracker.dateTime),
+                  style: cardFootnoteStyle,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
               ],
             ),
           ),
-          const SizedBox(width: 16),
           rightArrowIcon,
         ],
       ),

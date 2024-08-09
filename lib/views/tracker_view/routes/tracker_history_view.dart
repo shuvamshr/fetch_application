@@ -23,9 +23,16 @@ class TrackerHistoryView extends StatelessWidget {
             icon: leftArrowIcon,
             onPressed: () => Navigator.pop(context),
           ),
-          const Spacer(),
-          Text("Schedule History", style: appBarTitleStyle),
-          const Spacer(),
+          Expanded(
+            child: Text(
+              "Tracker History",
+              style: appBarTitleStyle,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(width: 24),
         ],
       ),
       body: FetchAppBody(children: [

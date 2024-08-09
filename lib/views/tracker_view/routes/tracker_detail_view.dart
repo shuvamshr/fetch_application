@@ -9,11 +9,11 @@ import 'package:fetch_application/views/tracker_view/widgets/app_body.dart';
 import 'package:fetch_application/views/tracker_view/widgets/form_link_tile.dart';
 import 'package:fetch_application/views/tracker_view/widgets/form_section.dart';
 import 'package:fetch_application/views/tracker_view/widgets/form_tile.dart';
+import 'package:fetch_application/views/tracker_view/widgets/service_card_list_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TrackerDetailView extends StatelessWidget {
   final String trackerID;
@@ -39,11 +39,15 @@ class TrackerDetailView extends StatelessWidget {
             icon: leftArrowIcon,
             onPressed: () => Navigator.pop(context),
           ),
-          const Spacer(),
-          Text(
+          Expanded(
+            child: Text(
               "${tracker.getCategory(trackerViewModel.allCategories).title} For ${tracker.getPet(trackerViewModel.allPets).name}",
-              style: appBarTitleStyle),
-          const Spacer(),
+              style: appBarTitleStyle,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              textAlign: TextAlign.center,
+            ),
+          ),
           IconButton(
               icon: editIcon,
               onPressed: () => {
@@ -95,27 +99,10 @@ class TrackerDetailView extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           if (tailoredServices.isNotEmpty)
-            FormSection(
-              title: "RECOMMENDED SERVICES",
-              children: [
-                for (var service in tailoredServices)
-                  GestureDetector(
-                    onTap: () => _launchURL(service.url),
-                    child: FormLinkTile(title: service.title, url: service.url),
-                  )
-              ],
-            ),
+            ServiceCardListView(
+                services: tailoredServices, title: "Recommended Services")
         ],
       ),
     );
-  }
-
-  void _launchURL(String url) async {
-    final Uri uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }

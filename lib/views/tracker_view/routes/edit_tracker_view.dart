@@ -6,6 +6,7 @@ import 'package:fetch_application/utils/constants/typography.dart';
 import 'package:fetch_application/view_models/tracker_view_model.dart';
 import 'package:fetch_application/views/tracker_view/routes/category_selector_view.dart';
 import 'package:fetch_application/views/tracker_view/routes/pet_selector_view.dart';
+import 'package:fetch_application/views/tracker_view/tracker_view.dart';
 import 'package:fetch_application/views/tracker_view/widgets/app_bar.dart';
 import 'package:fetch_application/views/tracker_view/widgets/app_body.dart';
 import 'package:fetch_application/views/tracker_view/widgets/date_picker.dart';
@@ -37,14 +38,23 @@ class EditTrackerView extends StatelessWidget {
               Navigator.pop(context),
             },
           ),
-          const Spacer(),
-          Text("Edit Tracker", style: appBarTitleStyle),
-          const Spacer(),
+          Expanded(
+            child: Text(
+              "Edit Tracker",
+              style: appBarTitleStyle,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              textAlign: TextAlign.center,
+            ),
+          ),
           IconButton(
             icon: deleteIcon,
             onPressed: () => {
               trackerViewModel.deleteTracker(tracker.id),
-              Navigator.popUntil(context, (route) => route.isFirst),
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const TrackerView()),
+              ),
             },
           )
         ],

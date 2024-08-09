@@ -28,9 +28,16 @@ class PetSelectorView extends StatelessWidget {
           children: [
             IconButton(
                 onPressed: () => Navigator.pop(context), icon: leftArrowIcon),
-            const Spacer(),
-            Text("Select Pet", style: appBarTitleStyle),
-            const Spacer(),
+            Expanded(
+              child: Text(
+                "Select Pet",
+                style: appBarTitleStyle,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(width: 24),
           ],
         ),
         body: FetchAppBody(

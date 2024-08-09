@@ -32,9 +32,16 @@ class AddTrackerView extends StatelessWidget {
             icon: leftArrowIcon,
             onPressed: () => Navigator.pop(context),
           ),
-          const Spacer(),
-          Text("Add New Tracker", style: appBarTitleStyle),
-          const Spacer(),
+          Expanded(
+            child: Text(
+              "Add New Tracker",
+              style: appBarTitleStyle,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(width: 24),
         ],
       ),
       body: FetchAppBody(
