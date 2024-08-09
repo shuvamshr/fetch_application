@@ -1,51 +1,50 @@
-import 'dart:convert';
-
 import 'package:fetch_application/models/category_model.dart';
 import 'package:fetch_application/models/pet_model.dart';
+import 'package:fetch_application/models/service_model.dart';
 import 'package:fetch_application/models/tracker_model.dart';
-import 'package:fetch_application/view_models/category_view_model.dart';
-import 'package:fetch_application/view_models/pet_view_model.dart';
+import 'package:fetch_application/repositories/category_repository.dart';
+import 'package:fetch_application/repositories/pet_repository.dart';
+import 'package:fetch_application/repositories/service_repository.dart';
+import 'package:fetch_application/repositories/tracker_repository.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:uuid/uuid.dart';
 
 class TrackerViewModel extends ChangeNotifier {
-  final PetViewModel petViewModel;
-  final CategoryViewModel categoryViewModel;
+  final TrackerRepository _trackerRepository;
+  final PetRepository _petRepository;
+  final CategoryRepository _categoryRepository;
+  final ServiceRepository _serviceRepository;
 
-  TrackerViewModel({
-    required this.petViewModel,
-    required this.categoryViewModel,
-  });
+  TrackerViewModel(
+    this._trackerRepository,
+    this._petRepository,
+    this._categoryRepository,
+    this._serviceRepository,
+  );
 
   List<Tracker> _trackers = [];
+  List<Pet> _pets = [];
+  List<Category> _categories = [];
+  List<Service> _services = [];
 
-  Future<void> loadTracker() async {
-    try {
-      final jsonString = await rootBundle.loadString('data/tracker_data.json');
-      final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
-      final List<dynamic> jsonList = jsonMap['trackers'];
-
-      _trackers = jsonList.map((json) => Tracker.fromJson(json)).toList();
-    } catch (e) {
-      // ignore: avoid_print
-      print("Error loading tracker: $e");
-    } finally {
-      notifyListeners();
-    }
+  Future<void> updateData() async {
+    _trackers = await _trackerRepository.fetchTrackers();
+    _pets = await _petRepository.fetchPets();
+    _categories = await _categoryRepository.fetchCategories();
+    _services = await _serviceRepository.fetchServices();
+    notifyListeners();
   }
 
-  // Filter Controller
+  List<Tracker> get allTrackers => _trackers;
+  List<Pet> get allPets => _pets;
+  List<Category> get allCategories => _categories;
+  List<Service> get allServices => _services;
 
-  Pet _activePet = Pet(
-      id: '000',
-      name: 'null',
-      breed: 'null',
-      gender: 'null',
-      dateOfBirth: DateTime.now(),
-      deSexed: false,
-      from: 'null',
-      image: 'null');
+  // TrackerView
+
+  Pet _activePet = Pet.nullValue();
 
   Pet get activePet => _activePet;
   set activePet(Pet pet) {
@@ -53,32 +52,70 @@ class TrackerViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Form Controller
+  List<Tracker> get trackersByToday {
+    final currentDate = DateTime.now();
+    return _trackers.where((tracker) {
+      return _activePet.id == 'null'
+          ? tracker.dateTime.year == currentDate.year &&
+              tracker.dateTime.month == currentDate.month &&
+              tracker.dateTime.day == currentDate.day
+          : tracker.getPet(_pets).id == _activePet.id &&
+              tracker.dateTime.year == currentDate.year &&
+              tracker.dateTime.month == currentDate.month &&
+              tracker.dateTime.day == currentDate.day;
+    }).toList();
+  }
 
-  Pet _selectedPet = Pet(
-      id: '000',
-      name: 'null',
-      breed: 'null',
-      gender: 'null',
-      dateOfBirth: DateTime.now(),
-      deSexed: false,
-      from: 'null',
-      image: 'null');
-  Category _selectedCategory =
-      Category(id: '000', title: 'null', description: 'null', image: 'null');
+  List<Tracker> get trackersByUpcoming {
+    final currentDate = DateTime.now();
+    final today =
+        DateTime(currentDate.year, currentDate.month, currentDate.day);
+
+    final upcomingTrackers = _trackers.where((tracker) {
+      final trackerDate = DateTime(
+          tracker.dateTime.year, tracker.dateTime.month, tracker.dateTime.day);
+      return _activePet.id == 'null'
+          ? trackerDate.isAfter(today)
+          : tracker.getPet(_pets).id == _activePet.id &&
+              trackerDate.isAfter(today);
+    }).toList();
+
+    upcomingTrackers.sort((a, b) => a.dateTime.compareTo(b.dateTime));
+
+    return upcomingTrackers;
+  }
+
+  List<Tracker> get trackersByPast {
+    final currentDate = DateTime.now();
+    final today =
+        DateTime(currentDate.year, currentDate.month, currentDate.day);
+
+    final pastTrackers = _trackers.where((tracker) {
+      final trackerDate = DateTime(
+          tracker.dateTime.year, tracker.dateTime.month, tracker.dateTime.day);
+      return trackerDate.isBefore(today);
+    }).toList();
+
+    pastTrackers.sort((a, b) => a.dateTime.compareTo(b.dateTime));
+
+    return pastTrackers;
+  }
+
+  // AddTrackerView Controller
+
+  Pet _selectedPet = Pet.nullValue();
+  Category _selectedCategory = Category.nullValue();
   DateTime _selectedDateTime = DateTime.now();
   String _selectedPriority = "Medium";
 
-  Pet get selectedPet =>
-      _selectedPet.id != '000' ? _selectedPet : petViewModel.allPets.first;
+  Pet get selectedPet => _selectedPet.id != 'null' ? _selectedPet : _pets.first;
   set selectedPet(Pet pet) {
     _selectedPet = pet;
     notifyListeners();
   }
 
-  Category get selectedCategory => _selectedCategory.id != '000'
-      ? _selectedCategory
-      : categoryViewModel.allCategories.first;
+  Category get selectedCategory =>
+      _selectedCategory.id != 'null' ? _selectedCategory : _categories.first;
   set selectedCategory(Category category) {
     _selectedCategory = category;
     notifyListeners();
@@ -106,58 +143,24 @@ class TrackerViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Tracker Controller
+  // TrackerDetailView
 
-  List<Tracker> get allTrackers => _trackers;
+  List<Service> getRecommendedServices(Pet pet, Category category) {
+    final petAge =
+        (DateTime.now().difference(pet.dateOfBirth).inDays / 365).ceil();
 
-  List<Tracker> get trackersByToday {
-    final currentDate = DateTime.now();
-    return _trackers.where((tracker) {
-      return _activePet.id == '000'
-          ? tracker.dateTime.year == currentDate.year &&
-              tracker.dateTime.month == currentDate.month &&
-              tracker.dateTime.day == currentDate.day
-          : tracker.getPet(petViewModel).id == _activePet.id &&
-              tracker.dateTime.year == currentDate.year &&
-              tracker.dateTime.month == currentDate.month &&
-              tracker.dateTime.day == currentDate.day;
+    return _services.where((service) {
+      final matchesCategory = service.categoryID == category.id;
+      final matchesBreed = service.forBreed.contains(pet.breed);
+      final matchesGender = service.forGender.contains(pet.gender);
+      final matchesDesexed = service.forDesexed.contains(pet.deSexed);
+      final matchesAge = service.forAge.contains(petAge);
+
+      return matchesCategory &&
+          matchesBreed &&
+          matchesGender &&
+          matchesDesexed &&
+          matchesAge;
     }).toList();
-  }
-
-  List<Tracker> get trackersByUpcoming {
-    final currentDate = DateTime.now();
-    final today =
-        DateTime(currentDate.year, currentDate.month, currentDate.day);
-
-    final upcomingTrackers = _trackers.where((tracker) {
-      final trackerDate = DateTime(
-          tracker.dateTime.year, tracker.dateTime.month, tracker.dateTime.day);
-      return _activePet.id == '000'
-          ? trackerDate.isAfter(today)
-          : tracker.getPet(petViewModel).id == _activePet.id &&
-              trackerDate.isAfter(today);
-    }).toList();
-
-    // Sort the list by date in ascending order (oldest first)
-    upcomingTrackers.sort((a, b) => a.dateTime.compareTo(b.dateTime));
-
-    return upcomingTrackers;
-  }
-
-  List<Tracker> get trackersByPast {
-    final currentDate = DateTime.now();
-    final today =
-        DateTime(currentDate.year, currentDate.month, currentDate.day);
-
-    final pastTrackers = _trackers.where((tracker) {
-      final trackerDate = DateTime(
-          tracker.dateTime.year, tracker.dateTime.month, tracker.dateTime.day);
-      return trackerDate.isBefore(today);
-    }).toList();
-
-    // Sort the list by date in ascending order (oldest first)
-    pastTrackers.sort((a, b) => a.dateTime.compareTo(b.dateTime));
-
-    return pastTrackers;
   }
 }
