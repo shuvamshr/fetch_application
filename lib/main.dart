@@ -1,6 +1,6 @@
 import 'package:fetch_application/repositories/category_repository.dart';
 import 'package:fetch_application/repositories/pet_repository.dart';
-import 'package:fetch_application/repositories/service_repository.dart';
+import 'package:fetch_application/repositories/medication_repository.dart';
 import 'package:fetch_application/repositories/tracker_repository.dart';
 import 'package:fetch_application/view_models/tracker_view_model.dart';
 import 'package:fetch_application/views/tracker_view/tracker_view.dart';
@@ -12,7 +12,7 @@ void main() {
   final trackerRepository = TrackerRepository();
   final petRepository = PetRepository();
   final categoryRepository = CategoryRepository();
-  final serviceRepository = ServiceRepository();
+  final medicationRepository = MedicationRepository();
 
   runApp(
     MultiProvider(
@@ -22,7 +22,7 @@ void main() {
             trackerRepository,
             petRepository,
             categoryRepository,
-            serviceRepository,
+            medicationRepository,
           ),
         ),
       ],

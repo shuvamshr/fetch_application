@@ -2,12 +2,14 @@ class Category {
   final String id;
   final String title;
   final String description;
+  final String type;
   final String image;
 
   Category({
     required this.id,
     required this.title,
     required this.description,
+    required this.type,
     required this.image,
   });
 
@@ -22,6 +24,7 @@ class Category {
         id: json['id'],
         title: json['title'],
         description: json['description'],
+        type: json['type'],
         image: json['image'],
       );
 
@@ -30,6 +33,7 @@ class Category {
       id: 'null',
       title: 'null',
       description: 'null',
+      type: 'null',
       image: 'null',
     );
   }

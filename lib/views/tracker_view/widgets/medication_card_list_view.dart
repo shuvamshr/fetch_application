@@ -1,16 +1,16 @@
-import 'package:fetch_application/models/service_model.dart';
+import 'package:fetch_application/models/medication_model.dart';
 import 'package:fetch_application/utils/constants/typography.dart';
-import 'package:fetch_application/views/tracker_view/widgets/service_card.dart';
+import 'package:fetch_application/views/tracker_view/widgets/medication_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ServiceCardListView extends StatelessWidget {
+class MedicationCardListView extends StatelessWidget {
   final String title;
-  final List<Service> services;
+  final List<Medication> medications;
 
-  const ServiceCardListView({
+  const MedicationCardListView({
     super.key,
-    required this.services,
+    required this.medications,
     required this.title,
   });
 
@@ -26,11 +26,11 @@ class ServiceCardListView extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) => GestureDetector(
-            onTap: () => _launchURL(services[index].url),
-            child: ServiceCard(service: services[index]),
+            onTap: () => _launchURL(medications[index].url),
+            child: MedicationCard(medication: medications[index]),
           ),
           separatorBuilder: (context, _) => const SizedBox(height: 12),
-          itemCount: services.length,
+          itemCount: medications.length,
         ),
         const SizedBox(height: 80),
       ],

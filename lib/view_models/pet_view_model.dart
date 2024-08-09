@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:fetch_application/models/pet_model.dart';
 import 'package:fetch_application/repositories/pet_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class PetViewModel extends ChangeNotifier {
   final PetRepository _petRepository;

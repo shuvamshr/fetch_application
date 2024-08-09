@@ -2,63 +2,94 @@
   "categories": [
     {
       "id": "C001",
-      "title": "Vet Checkup",
-      "description": "Yearly health assessment",
-      "image": "vaccination"
+      "title": "Topical Flea Treatments",
+      "description": "Applied to the skin prevent fleas",
+      "type": "External",
+      "image": "flea_1"
     },
     {
       "id": "C002",
-      "title": "Vaccinations",
-      "description": "Immunization shots",
-      "image": "vaccination"
+      "title": "Flea Collars",
+      "description": "Worn around the neck to repel fleas",
+      "type": "External",
+      "image": "flea_2"
     },
     {
       "id": "C003",
-      "title": "Dental Checkup",
-      "description": "Oral health maintenance",
-      "image": "vaccination"
+      "title": "Topical Tick Treatments",
+      "description": "Applied to skin to prevent ticks",
+      "type": "External",
+      "image": "tick_1"
     },
     {
       "id": "C004",
-      "title": "Parasite Control",
-      "description": "Prevent fleas and ticks",
-      "image": "vaccination"
+      "title": "Tick Collars",
+      "description": "Collars that protect against tick bites",
+      "type": "External",
+      "image": "web_1"
     },
     {
       "id": "C005",
-      "title": "Blood Tests",
-      "description": "Routine blood analysis",
-      "image": "vaccination"
+      "title": "Topical Mite Treatments",
+      "description": "Applied to skin to eliminate mites",
+      "type": "External",
+      "image": "flea_1"
     },
     {
       "id": "C006",
-      "title": "Spaying/Neutering",
-      "description": "Surgical sterilization",
-      "image": "vaccination"
+      "title": "Topical Lice Treatments",
+      "description": "Treats lice infestations",
+      "type": "External",
+      "image": "mite_1"
     },
     {
       "id": "C007",
-      "title": "Microchipping",
-      "description": "Permanent ID chip",
-      "image": "vaccination"
+      "title": "Ear Drops",
+      "description": "Treat and eliminate ear mites",
+      "type": "External",
+      "image": "drop_1"
     },
     {
       "id": "C008",
-      "title": "Weight & Nutrition",
-      "description": "Diet and weight management",
-      "image": "vaccination"
+      "title": "Topical Mange Treatments",
+      "description": "Shampoos applied to treat mange",
+      "type": "External",
+      "image": "lotion_1"
     },
     {
       "id": "C009",
-      "title": "Senior Dog Care",
-      "description": "Care for older dogs",
-      "image": "vaccination"
+      "title": "Oral Heartworm Medications",
+      "description": "Chewable pills to prevent heartworm infections",
+      "type": "Internal",
+      "image": "pill_1"
     },
     {
       "id": "C010",
-      "title": "Allergy Testing",
-      "description": "Identify allergies",
-      "image": "vaccination"
+      "title": "Topical Heartworm Medications",
+      "description": "Medications to prevent heartworms",
+      "type": "Internal",
+      "image": "lotion_1"
+    },
+    {
+      "id": "C011",
+      "title": "Oral Deworming Medications",
+      "description": "Tablets or liquids to treat intestinal worms",
+      "type": "Internal",
+      "image": "pill_1"
+    },
+    {
+      "id": "C012",
+      "title": "Oral Giardia Treatments",
+      "description": "Oral medications for treat giardia infections",
+      "type": "Internal",
+      "image": "pill_1"
+    },
+    {
+      "id": "C013",
+      "title": "Oral Coccidia Treatments",
+      "description": "Medications to prevent disease by coccidia parasites",
+      "type": "Internal",
+      "image": "pill_1"
     }
   ]
 }

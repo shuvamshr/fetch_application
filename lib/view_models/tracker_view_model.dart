@@ -1,10 +1,10 @@
 import 'package:fetch_application/models/category_model.dart';
 import 'package:fetch_application/models/pet_model.dart';
-import 'package:fetch_application/models/service_model.dart';
+import 'package:fetch_application/models/medication_model.dart';
 import 'package:fetch_application/models/tracker_model.dart';
 import 'package:fetch_application/repositories/category_repository.dart';
 import 'package:fetch_application/repositories/pet_repository.dart';
-import 'package:fetch_application/repositories/service_repository.dart';
+import 'package:fetch_application/repositories/medication_repository.dart';
 import 'package:fetch_application/repositories/tracker_repository.dart';
 
 import 'package:flutter/material.dart';
@@ -15,30 +15,30 @@ class TrackerViewModel extends ChangeNotifier {
   final TrackerRepository _trackerRepository;
   final PetRepository _petRepository;
   final CategoryRepository _categoryRepository;
-  final ServiceRepository _serviceRepository;
+  final MedicationRepository _medicationRepository;
 
   TrackerViewModel(
     this._trackerRepository,
     this._petRepository,
     this._categoryRepository,
-    this._serviceRepository,
+    this._medicationRepository,
   );
 
   List<Tracker> _trackers = [];
   List<Pet> _pets = [];
   List<Category> _categories = [];
-  List<Service> _services = [];
+  List<Medication> _medications = [];
 
   List<Tracker> get allTrackers => _trackers;
   List<Pet> get allPets => _pets;
   List<Category> get allCategories => _categories;
-  List<Service> get allServices => _services;
+  List<Medication> get allMedications => _medications;
 
   Future<void> updateData() async {
     _trackers = await _trackerRepository.fetchTrackers();
     _pets = await _petRepository.fetchPets();
     _categories = await _categoryRepository.fetchCategories();
-    _services = await _serviceRepository.fetchServices();
+    _medications = await _medicationRepository.fetchMedications();
     notifyListeners();
   }
 
@@ -189,16 +189,16 @@ class TrackerViewModel extends ChangeNotifier {
 
   // TrackerDetailView Logic
 
-  List<Service> getRecommendedServices(Pet pet, Category category) {
+  List<Medication> getRecommendedMedications(Pet pet, Category category) {
     final petAge =
         (DateTime.now().difference(pet.dateOfBirth).inDays / 365).ceil();
 
-    return _services.where((service) {
-      final matchesCategory = service.categoryID == category.id;
-      final matchesBreed = service.forBreed.contains(pet.breed);
-      final matchesGender = service.forGender.contains(pet.gender);
-      final matchesDesexed = service.forDesexed.contains(pet.deSexed);
-      final matchesAge = service.forAge.contains(petAge);
+    return _medications.where((medication) {
+      final matchesCategory = medication.categoryID == category.id;
+      final matchesBreed = medication.forBreed.contains(pet.breed);
+      final matchesGender = medication.forGender.contains(pet.gender);
+      final matchesDesexed = medication.forDesexed.contains(pet.deSexed);
+      final matchesAge = medication.forAge.contains(petAge);
 
       return matchesCategory &&
           matchesBreed &&

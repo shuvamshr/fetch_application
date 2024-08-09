@@ -1,14 +1,14 @@
-import 'package:fetch_application/models/service_model.dart';
+import 'package:fetch_application/models/medication_model.dart';
 import 'package:fetch_application/utils/constants/colors.dart';
 import 'package:fetch_application/utils/constants/icons.dart';
 import 'package:fetch_application/utils/constants/typography.dart';
 
 import 'package:flutter/material.dart';
 
-class ServiceCard extends StatelessWidget {
-  final Service service;
+class MedicationCard extends StatelessWidget {
+  final Medication medication;
 
-  const ServiceCard({super.key, required this.service});
+  const MedicationCard({super.key, required this.medication});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class ServiceCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image(
-                image: AssetImage('images/company/${service.image}.png'),
+                image: AssetImage('images/company/${medication.image}.png'),
                 fit: BoxFit
                     .cover, // Ensures the image covers the entire container
               ),
@@ -41,13 +41,13 @@ class ServiceCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  service.title,
+                  medication.title,
                   style: cardTitleStyle,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
                 Text(
-                  service.url,
+                  medication.url,
                   style: cardSubheadingStyle,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,

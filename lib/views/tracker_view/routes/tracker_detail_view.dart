@@ -6,10 +6,10 @@ import 'package:fetch_application/view_models/tracker_view_model.dart';
 import 'package:fetch_application/views/tracker_view/routes/edit_tracker_view.dart';
 import 'package:fetch_application/views/tracker_view/widgets/app_bar.dart';
 import 'package:fetch_application/views/tracker_view/widgets/app_body.dart';
-import 'package:fetch_application/views/tracker_view/widgets/form_link_tile.dart';
+
 import 'package:fetch_application/views/tracker_view/widgets/form_section.dart';
 import 'package:fetch_application/views/tracker_view/widgets/form_tile.dart';
-import 'package:fetch_application/views/tracker_view/widgets/service_card_list_view.dart';
+import 'package:fetch_application/views/tracker_view/widgets/medication_card_list_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -27,7 +27,7 @@ class TrackerDetailView extends StatelessWidget {
     final tracker =
         trackerViewModel.allTrackers.firstWhere((item) => item.id == trackerID);
 
-    final tailoredServices = trackerViewModel.getRecommendedServices(
+    final recommendedMedications = trackerViewModel.getRecommendedMedications(
         tracker.getPet(trackerViewModel.allPets),
         tracker.getCategory(trackerViewModel.allCategories));
 
@@ -98,9 +98,10 @@ class TrackerDetailView extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          if (tailoredServices.isNotEmpty)
-            ServiceCardListView(
-                services: tailoredServices, title: "Recommended Services")
+          if (recommendedMedications.isNotEmpty)
+            MedicationCardListView(
+                medications: recommendedMedications,
+                title: "Recommended Medications")
         ],
       ),
     );

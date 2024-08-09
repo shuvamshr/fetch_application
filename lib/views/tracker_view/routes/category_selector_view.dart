@@ -44,8 +44,10 @@ class CategorySelectorView extends StatelessWidget {
         body: FetchAppBody(
           children: [
             FormSection(
+              title: "External Treatment",
               children: [
-                for (var category in categories) ...[
+                for (var category
+                    in categories.where((item) => item.type == 'External')) ...[
                   GestureDetector(
                     onTap: () => {
                       onOptionSelected(category),
@@ -61,6 +63,28 @@ class CategorySelectorView extends StatelessWidget {
                 ],
               ],
             ),
+            const SizedBox(height: 12),
+            FormSection(
+              title: "Internal Treatment",
+              children: [
+                for (var category
+                    in categories.where((item) => item.type == 'Internal')) ...[
+                  GestureDetector(
+                    onTap: () => {
+                      onOptionSelected(category),
+                      Navigator.pop(context),
+                    },
+                    child: OptionTile(
+                      title: category.title,
+                      type: 'category',
+                      image: category.image,
+                      isSelected: selectedCategory == category,
+                    ),
+                  )
+                ],
+              ],
+            ),
+            const SizedBox(height: 80),
           ],
         ));
   }
