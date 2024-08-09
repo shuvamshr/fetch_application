@@ -29,6 +29,11 @@ class TrackerViewModel extends ChangeNotifier {
   List<Category> _categories = [];
   List<Service> _services = [];
 
+  List<Tracker> get allTrackers => _trackers;
+  List<Pet> get allPets => _pets;
+  List<Category> get allCategories => _categories;
+  List<Service> get allServices => _services;
+
   Future<void> updateData() async {
     _trackers = await _trackerRepository.fetchTrackers();
     _pets = await _petRepository.fetchPets();
@@ -37,12 +42,37 @@ class TrackerViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Tracker> get allTrackers => _trackers;
-  List<Pet> get allPets => _pets;
-  List<Category> get allCategories => _categories;
-  List<Service> get allServices => _services;
+  void addTracker() async {
+    final tracker = Tracker(
+      id: const Uuid().toString(),
+      petID: selectedPet.id,
+      categoryID: selectedCategory.id,
+      dateTime: selectedDateTime,
+      priority: selectedPriority,
+    );
 
-  // TrackerView
+    await _trackerRepository.addTracker(tracker);
+    updateData();
+  }
+
+  void updateTracker() async {
+    final tracker = Tracker(
+      id: selectedTrackerID,
+      petID: selectedPet.id,
+      categoryID: selectedCategory.id,
+      dateTime: selectedDateTime,
+      priority: selectedPriority,
+    );
+    await _trackerRepository.updateTracker(tracker);
+    updateData();
+  }
+
+  void deleteTracker(String id) async {
+    await _trackerRepository.deleteTracker(id);
+    updateData();
+  }
+
+  // TrackerView Logic
 
   Pet _activePet = Pet.nullValue();
 
@@ -101,49 +131,63 @@ class TrackerViewModel extends ChangeNotifier {
     return pastTrackers;
   }
 
-  // AddTrackerView Controller
+  // AddTrackerView Logic
 
-  Pet _selectedPet = Pet.nullValue();
-  Category _selectedCategory = Category.nullValue();
-  DateTime _selectedDateTime = DateTime.now();
-  String _selectedPriority = "Medium";
+  Pet? _selectedPet;
+  Category? _selectedCategory;
+  DateTime? _selectedDateTime;
+  String? _selectedPriority;
 
-  Pet get selectedPet => _selectedPet.id != 'null' ? _selectedPet : _pets.first;
+  void initializeForAdd() {
+    _selectedPet = Pet.nullValue();
+    _selectedCategory = Category.nullValue();
+    _selectedDateTime = DateTime.now();
+    _selectedPriority = "Medium";
+    notifyListeners();
+  }
+
+  Pet get selectedPet =>
+      _selectedPet!.id != 'null' ? _selectedPet! : _pets.first;
   set selectedPet(Pet pet) {
     _selectedPet = pet;
     notifyListeners();
   }
 
   Category get selectedCategory =>
-      _selectedCategory.id != 'null' ? _selectedCategory : _categories.first;
+      _selectedCategory!.id != 'null' ? _selectedCategory! : _categories.first;
   set selectedCategory(Category category) {
     _selectedCategory = category;
     notifyListeners();
   }
 
-  DateTime get selectedDateTime => _selectedDateTime;
+  DateTime get selectedDateTime => _selectedDateTime!;
   set selectedDateTime(DateTime dateTime) {
     _selectedDateTime = dateTime;
     notifyListeners();
   }
 
-  String get selectedPriority => _selectedPriority;
+  String get selectedPriority => _selectedPriority!;
   set selectedPriority(String priority) {
     _selectedPriority = priority;
     notifyListeners();
   }
 
-  void addNewTracker() {
-    final newTracker = Tracker(
-        id: const Uuid().toString(),
-        petID: selectedPet.id,
-        categoryID: selectedCategory.id,
-        dateTime: selectedDateTime);
-    _trackers.add(newTracker);
+  // EditTrackerView Logic
+
+  String? _selectedTrackerID;
+
+  String get selectedTrackerID => _selectedTrackerID!;
+
+  void initializeForEdit(Tracker tracker) {
+    _selectedTrackerID = tracker.id;
+    _selectedPet = tracker.getPet(_pets);
+    _selectedCategory = tracker.getCategory(_categories);
+    _selectedDateTime = tracker.dateTime;
+    _selectedPriority = tracker.priority;
     notifyListeners();
   }
 
-  // TrackerDetailView
+  // TrackerDetailView Logic
 
   List<Service> getRecommendedServices(Pet pet, Category category) {
     final petAge =
