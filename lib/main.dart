@@ -2,9 +2,6 @@ import 'package:fetch_application/repositories/category_repository.dart';
 import 'package:fetch_application/repositories/pet_repository.dart';
 import 'package:fetch_application/repositories/service_repository.dart';
 import 'package:fetch_application/repositories/tracker_repository.dart';
-import 'package:fetch_application/view_models/category_view_model.dart';
-
-import 'package:fetch_application/view_models/service_view_model.dart';
 import 'package:fetch_application/view_models/tracker_view_model.dart';
 import 'package:fetch_application/views/tracker_view/tracker_view.dart';
 import 'package:fetch_application/views/tracker_view/widgets/fetch_loading_indicator.dart';
@@ -38,7 +35,7 @@ class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
   Future<void> simulateLoading(BuildContext context) async {
-    await Future.delayed(const Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 2));
 
     final trackerViewModel = context.read<TrackerViewModel>();
 
