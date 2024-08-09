@@ -4,7 +4,7 @@ import 'package:fetch_application/utils/constants/typography.dart';
 
 import 'package:fetch_application/view_models/tracker_view_model.dart';
 import 'package:fetch_application/views/tracker_view/routes/add_tracker_view.dart';
-import 'package:fetch_application/views/tracker_view/routes/schedule_history_view.dart';
+import 'package:fetch_application/views/tracker_view/routes/tracker_history_view.dart';
 import 'package:fetch_application/views/tracker_view/widgets/add_tracker_button.dart';
 import 'package:fetch_application/views/tracker_view/widgets/app_body.dart';
 
@@ -39,8 +39,7 @@ class TrackerView extends StatelessWidget {
             onPressed: () => Navigator.push(
               context,
               CupertinoPageRoute(
-                  builder: (context) => ScheduleHistoryView(
-                      trackers: trackerViewModel.trackersByPast)),
+                  builder: (context) => const TrackerHistoryView()),
             ),
           ),
         ],
@@ -76,11 +75,14 @@ class TrackerView extends StatelessWidget {
         ],
       ),
       floatingActionButton: AddTrackerButton(
-          onPressed: () => Navigator.push(
-                context,
-                CupertinoPageRoute(
-                    builder: (context) => const AddTrackerView()),
-              )),
+        onPressed: () => {
+          trackerViewModel.initializeForAdd(),
+          Navigator.push(
+            context,
+            CupertinoPageRoute(builder: (context) => const AddTrackerView()),
+          ),
+        },
+      ),
     );
   }
 }

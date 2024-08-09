@@ -34,7 +34,7 @@ class TrackerCardListView extends StatelessWidget {
                   context,
                   CupertinoPageRoute(
                       builder: (context) => TrackerDetailView(
-                            tracker: trackers[index],
+                            trackerID: trackers[index].id,
                           )),
                 ),
                 child: TrackerCard(tracker: trackers[index]),

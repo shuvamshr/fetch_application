@@ -1,3 +1,4 @@
+import 'package:fetch_application/models/tracker_model.dart';
 import 'package:fetch_application/utils/constants/colors.dart';
 import 'package:fetch_application/utils/constants/icons.dart';
 import 'package:fetch_application/utils/constants/typography.dart';
@@ -17,8 +18,10 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-class AddTrackerView extends StatelessWidget {
-  const AddTrackerView({super.key});
+class EditTrackerView extends StatelessWidget {
+  final Tracker tracker;
+
+  const EditTrackerView({super.key, required this.tracker});
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +33,20 @@ class AddTrackerView extends StatelessWidget {
         children: [
           IconButton(
             icon: leftArrowIcon,
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => {
+              Navigator.pop(context),
+            },
           ),
           const Spacer(),
-          Text("Add New Tracker", style: appBarTitleStyle),
+          Text("Edit Tracker", style: appBarTitleStyle),
           const Spacer(),
+          IconButton(
+            icon: deleteIcon,
+            onPressed: () => {
+              trackerViewModel.deleteTracker(tracker.id),
+              Navigator.popUntil(context, (route) => route.isFirst),
+            },
+          )
         ],
       ),
       body: FetchAppBody(
@@ -99,11 +111,12 @@ class AddTrackerView extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           PrimaryButton(
-              title: "Add Tracker",
-              onPressed: () => {
-                    trackerViewModel.addTracker(),
-                    Navigator.pop(context),
-                  }),
+            title: "Update Tracker",
+            onPressed: () => {
+              trackerViewModel.updateTracker(),
+              Navigator.pop(context),
+            },
+          ),
         ],
       ),
     );
