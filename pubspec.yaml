@@ -28,3 +28,9 @@ flutter:
     - family: CircularMedium
       fonts:
         - asset: assets/fonts/Circular-Std-Medium.ttf
+  assets:
+    - assets/data/
+    - assets/images/category/
+    - assets/images/company/
+    - assets/images/other/
+    - assets/images/pets/
