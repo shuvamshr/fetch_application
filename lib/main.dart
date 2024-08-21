@@ -15,13 +15,17 @@ void main() {
   final medicationRepository = MedicationRepository();
 
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => TrackerViewModel(
-        trackerRepository,
-        petRepository,
-        categoryRepository,
-        medicationRepository,
-      ),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => TrackerViewModel(
+            trackerRepository,
+            petRepository,
+            categoryRepository,
+            medicationRepository,
+          ),
+        ),
+      ],
       child: const MainApp(),
     ),
   );
@@ -30,12 +34,30 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
+  Future<void> simulateLoading(BuildContext context) async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    final trackerViewModel = context.read<TrackerViewModel>();
+
+    await Future.wait([trackerViewModel.updateData()]);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Fetch App',
       debugShowCheckedModeBanner: false,
-      home: TrackerView(),
+      home: FutureBuilder<void>(
+          future: simulateLoading(context),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text('Error loading data: ${snapshot.error}');
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: FetchLoadingIndicator());
+            } else {
+              return const TrackerView();
+            }
+          }),
     );
   }
 }
