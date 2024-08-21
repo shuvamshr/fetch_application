@@ -15,17 +15,13 @@ void main() {
   final medicationRepository = MedicationRepository();
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => TrackerViewModel(
-            trackerRepository,
-            petRepository,
-            categoryRepository,
-            medicationRepository,
-          ),
-        ),
-      ],
+    ChangeNotifierProvider(
+      create: (context) => TrackerViewModel(
+        trackerRepository,
+        petRepository,
+        categoryRepository,
+        medicationRepository,
+      ),
       child: const MainApp(),
     ),
   );
