@@ -30,21 +30,14 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-  Future<void> simulateLoading(BuildContext context) async {
-    await Future.delayed(const Duration(seconds: 2));
-
-    final trackerViewModel = context.read<TrackerViewModel>();
-
-    await Future.wait([trackerViewModel.updateData()]);
-  }
-
   @override
   Widget build(BuildContext context) {
+    final trackerViewModel = context.read<TrackerViewModel>();
     return MaterialApp(
       title: 'Fetch App',
       debugShowCheckedModeBanner: false,
       home: FutureBuilder<void>(
-          future: simulateLoading(context),
+          future: trackerViewModel.simulateLoading(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Text('Error loading data: ${snapshot.error}');
