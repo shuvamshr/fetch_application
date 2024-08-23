@@ -22,14 +22,16 @@ class TrackerDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trackerViewModel = context.watch<TrackerViewModel>();
+    final trackerViewObservable = context.watch<TrackerViewModel>();
+    final trackerViewAction = context.read<TrackerViewModel>();
 
-    final tracker =
-        trackerViewModel.allTrackers.firstWhere((item) => item.id == trackerID);
+    final tracker = trackerViewObservable.allTrackers
+        .firstWhere((item) => item.id == trackerID);
 
-    final recommendedMedications = trackerViewModel.getRecommendedMedications(
-        tracker.getPet(trackerViewModel.allPets),
-        tracker.getCategory(trackerViewModel.allCategories));
+    final recommendedMedications =
+        trackerViewObservable.getRecommendedMedications(
+            tracker.getPet(trackerViewObservable.allPets),
+            tracker.getCategory(trackerViewObservable.allCategories));
 
     return Scaffold(
       backgroundColor: appBodyPrimaryBackground,
@@ -41,7 +43,7 @@ class TrackerDetailView extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              tracker.getCategory(trackerViewModel.allCategories).title,
+              tracker.getCategory(trackerViewObservable.allCategories).title,
               style: appBarTitleStyle,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
@@ -51,8 +53,7 @@ class TrackerDetailView extends StatelessWidget {
           IconButton(
               icon: editIcon,
               onPressed: () => {
-                    trackerViewModel.initializeForEdit(tracker),
-                    print(trackerViewModel.selectedPet.name),
+                    trackerViewAction.initializeForEdit(tracker),
                     Navigator.push(
                       context,
                       CupertinoPageRoute(
@@ -70,17 +71,19 @@ class TrackerDetailView extends StatelessWidget {
               FormTile(
                 type: 'pets',
                 label: 'Pet',
-                selection: tracker.getPet(trackerViewModel.allPets).name,
-                image: tracker.getPet(trackerViewModel.allPets).image,
+                selection: tracker.getPet(trackerViewObservable.allPets).name,
+                image: tracker.getPet(trackerViewObservable.allPets).image,
                 readOnly: true,
               ),
               FormTile(
                 type: 'category',
                 label: 'Category',
-                selection:
-                    tracker.getCategory(trackerViewModel.allCategories).title,
-                image:
-                    tracker.getCategory(trackerViewModel.allCategories).image,
+                selection: tracker
+                    .getCategory(trackerViewObservable.allCategories)
+                    .title,
+                image: tracker
+                    .getCategory(trackerViewObservable.allCategories)
+                    .image,
                 readOnly: true,
               ),
               FormTile(

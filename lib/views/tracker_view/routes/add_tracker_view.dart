@@ -22,7 +22,8 @@ class AddTrackerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trackerViewModel = context.watch<TrackerViewModel>();
+    final trackerViewObservable = context.watch<TrackerViewModel>();
+    final trackerViewAction = context.read<TrackerViewModel>();
 
     return Scaffold(
       backgroundColor: appBodyPrimaryBackground,
@@ -53,16 +54,16 @@ class AddTrackerView extends StatelessWidget {
                   context,
                   CupertinoPageRoute(
                       builder: (context) => PetSelectorView(
-                          pets: trackerViewModel.allPets,
-                          selectedPet: trackerViewModel.selectedPet,
+                          pets: trackerViewObservable.allPets,
+                          selectedPet: trackerViewObservable.selectedPet,
                           onOptionSelected: (pet) =>
-                              trackerViewModel.selectedPet = pet)),
+                              trackerViewAction.selectedPet = pet)),
                 ),
                 child: FormTile(
                   type: "pets",
                   label: "Pet",
-                  selection: trackerViewModel.selectedPet.name,
-                  image: trackerViewModel.selectedPet.image,
+                  selection: trackerViewObservable.selectedPet.name,
+                  image: trackerViewObservable.selectedPet.image,
                 ),
               ),
             ],
@@ -75,16 +76,17 @@ class AddTrackerView extends StatelessWidget {
                   context,
                   CupertinoPageRoute(
                       builder: (context) => CategorySelectorView(
-                          categories: trackerViewModel.allCategories,
-                          selectedCategory: trackerViewModel.selectedCategory,
+                          categories: trackerViewObservable.allCategories,
+                          selectedCategory:
+                              trackerViewObservable.selectedCategory,
                           onOptionSelected: (category) =>
-                              trackerViewModel.selectedCategory = category)),
+                              trackerViewAction.selectedCategory = category)),
                 ),
                 child: FormTile(
                   type: "category",
                   label: "Category",
-                  selection: trackerViewModel.selectedCategory.title,
-                  image: trackerViewModel.selectedCategory.image,
+                  selection: trackerViewObservable.selectedCategory.title,
+                  image: trackerViewObservable.selectedCategory.image,
                 ),
               ),
             ],
@@ -93,14 +95,14 @@ class AddTrackerView extends StatelessWidget {
           FormSection(
             children: [
               DatePicker(
-                initialDate: trackerViewModel.selectedDateTime,
+                initialDate: trackerViewObservable.selectedDateTime,
                 onDateSelected: (date) =>
-                    trackerViewModel.selectedDateTime = date,
+                    trackerViewAction.selectedDateTime = date,
               ),
               PriorityPicker(
-                initialPriority: trackerViewModel.selectedPriority,
+                initialPriority: trackerViewObservable.selectedPriority,
                 onPrioritySelected: (priority) =>
-                    trackerViewModel.selectedPriority = priority,
+                    trackerViewAction.selectedPriority = priority,
               ),
             ],
           ),
@@ -108,7 +110,7 @@ class AddTrackerView extends StatelessWidget {
           PrimaryButton(
               title: "Add Tracker",
               onPressed: () => {
-                    trackerViewModel.addTracker(),
+                    trackerViewAction.addTracker(),
                     Navigator.pop(context),
                   }),
         ],

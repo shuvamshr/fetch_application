@@ -21,7 +21,8 @@ class TrackerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trackerViewModel = context.watch<TrackerViewModel>();
+    final trackerViewAction = context.read<TrackerViewModel>();
+    final trackerViewObservable = context.watch<TrackerViewModel>();
 
     return Scaffold(
       backgroundColor: appBodyPrimaryBackground,
@@ -53,27 +54,27 @@ class TrackerView extends StatelessWidget {
       body: FetchAppBody(
         children: [
           FilterTabListView(
-            pets: trackerViewModel.allPets,
-            onTabSelected: (pet) => {trackerViewModel.activePet = pet},
-            activePet: trackerViewModel.activePet,
+            pets: trackerViewObservable.allPets,
+            onTabSelected: (pet) => {trackerViewAction.activePet = pet},
+            activePet: trackerViewObservable.activePet,
           ),
-          if (trackerViewModel.trackersByToday.isNotEmpty)
+          if (trackerViewObservable.trackersByToday.isNotEmpty)
             TrackerCardListView(
-              title: "For ${trackerViewModel.activePet.name} Today",
-              trackers: trackerViewModel.trackersByToday,
+              title: "For ${trackerViewObservable.activePet.name} Today",
+              trackers: trackerViewObservable.trackersByToday,
             ),
-          if (trackerViewModel.trackersByUpcoming.isNotEmpty)
+          if (trackerViewObservable.trackersByUpcoming.isNotEmpty)
             TrackerCardListView(
-              title: "Upcoming For ${trackerViewModel.activePet.name}",
-              trackers: trackerViewModel.trackersByUpcoming,
+              title: "Upcoming For ${trackerViewObservable.activePet.name}",
+              trackers: trackerViewObservable.trackersByUpcoming,
             ),
-          if (trackerViewModel.trackersByToday.isEmpty &&
-              trackerViewModel.trackersByUpcoming.isEmpty)
+          if (trackerViewObservable.trackersByToday.isEmpty &&
+              trackerViewObservable.trackersByUpcoming.isEmpty)
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.only(top: 128),
               child: Text(
-                "No Upcoming For ${trackerViewModel.activePet.name}",
+                "No Upcoming For ${trackerViewObservable.activePet.name}",
                 style: appBodyNoteStyle,
               ),
             ),
@@ -82,7 +83,7 @@ class TrackerView extends StatelessWidget {
       ),
       floatingActionButton: AddTrackerButton(
         onPressed: () => {
-          trackerViewModel.initializeForAdd(),
+          trackerViewAction.initializeForAdd(),
           Navigator.push(
             context,
             CupertinoPageRoute(builder: (context) => const AddTrackerView()),

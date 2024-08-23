@@ -14,7 +14,7 @@ class TrackerHistoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trackerViewModel = context.watch<TrackerViewModel>();
+    final trackerViewObservable = context.watch<TrackerViewModel>();
     return Scaffold(
       backgroundColor: appBodyPrimaryBackground,
       appBar: FetchAppBar(
@@ -36,11 +36,11 @@ class TrackerHistoryView extends StatelessWidget {
         ],
       ),
       body: FetchAppBody(children: [
-        if (trackerViewModel.trackersByPast.isNotEmpty)
+        if (trackerViewObservable.trackersByPast.isNotEmpty)
           TrackerCardListView(
               title: "Past For All Pets",
-              trackers: trackerViewModel.trackersByPast),
-        if (trackerViewModel.trackersByPast.isEmpty)
+              trackers: trackerViewObservable.trackersByPast),
+        if (trackerViewObservable.trackersByPast.isEmpty)
           Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.only(top: 128),

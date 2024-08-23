@@ -15,7 +15,7 @@ class TrackerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trackerViewModel = Provider.of<TrackerViewModel>(context);
+    final trackerViewObservable = context.watch<TrackerViewModel>();
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -31,12 +31,12 @@ class TrackerCard extends StatelessWidget {
               CircleAvatar(
                 radius: 52 / 2,
                 backgroundImage: AssetImage(
-                    'images/pets/${tracker.getPet(trackerViewModel.allPets).image}.png'),
+                    'images/pets/${tracker.getPet(trackerViewObservable.allPets).image}.png'),
               ),
               CircleAvatar(
                 radius: 26 / 2,
                 backgroundImage: AssetImage(
-                    'images/category/${tracker.getCategory(trackerViewModel.allCategories).image}.png'),
+                    'images/category/${tracker.getCategory(trackerViewObservable.allCategories).image}.png'),
               ),
             ],
           ),
@@ -46,14 +46,16 @@ class TrackerCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  tracker.getCategory(trackerViewModel.allCategories).title,
+                  tracker
+                      .getCategory(trackerViewObservable.allCategories)
+                      .title,
                   style: cardTitleStyle,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
                 Text(
                   tracker
-                      .getCategory(trackerViewModel.allCategories)
+                      .getCategory(trackerViewObservable.allCategories)
                       .description,
                   style: cardSubheadingStyle,
                   overflow: TextOverflow.ellipsis,
