@@ -1,14 +1,14 @@
 import 'package:fetch_application/models/tracker_model.dart';
-import 'package:fetch_application/services/tracker_service.dart';
+import 'package:fetch_application/services/fastapi_service.dart';
 
 class TrackerRepository {
   List<Tracker> _trackers = [];
-  final TrackerService _trackerService = TrackerService();
+  final FastapiService _fastapiService = FastapiService();
 
   Future<List<Tracker>> fetchTrackers() async {
     try {
       if (_trackers.isEmpty) {
-        _trackers = await _trackerService.fetchData();
+        _trackers = await _fastapiService.fetchTrackers();
       }
       return _trackers;
     } catch (e) {

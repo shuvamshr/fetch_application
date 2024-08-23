@@ -1,19 +1,19 @@
 import 'dart:convert';
 
 import 'package:fetch_application/models/category_model.dart';
+import 'package:fetch_application/services/fastapi_service.dart';
 import 'package:flutter/services.dart';
 
 class CategoryRepository {
+  List<Category> _categories = [];
+  final FastapiService _fastapiService = FastapiService();
+
   Future<List<Category>> fetchCategories() async {
     try {
-      final jsonString =
-          await rootBundle.loadString('assets/data/category_data.json');
-      final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
-      final List<dynamic> jsonList = jsonMap['categories'];
-
-      List<Category> categories =
-          jsonList.map((json) => Category.fromJson(json)).toList();
-      return categories;
+      if (_categories.isEmpty) {
+        _categories = await _fastapiService.fetchCategories();
+      }
+      return _categories;
     } catch (e) {
       throw Exception("Error loading categories: $e");
     }

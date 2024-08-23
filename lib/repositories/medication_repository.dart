@@ -1,19 +1,19 @@
 import 'dart:convert';
 
 import 'package:fetch_application/models/medication_model.dart';
+import 'package:fetch_application/services/fastapi_service.dart';
 import 'package:flutter/services.dart';
 
 class MedicationRepository {
+  List<Medication> _medications = [];
+  final FastapiService _fastapiService = FastapiService();
+
   Future<List<Medication>> fetchMedications() async {
     try {
-      final jsonString =
-          await rootBundle.loadString('assets/data/medication_data.json');
-      final Map<String, dynamic> jsonMap = await jsonDecode(jsonString);
-      final List<dynamic> jsonList = await jsonMap['medications'];
-
-      List<Medication> medications =
-          jsonList.map((json) => Medication.fromJson(json)).toList();
-      return medications;
+      if (_medications.isEmpty) {
+        _medications = await _fastapiService.fetchMedications();
+      }
+      return _medications;
     } catch (e) {
       throw Exception("Error loading medications: $e");
     }
