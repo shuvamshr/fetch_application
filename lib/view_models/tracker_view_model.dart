@@ -82,11 +82,6 @@ class TrackerViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> simulateLoading() async {
-    await Future.delayed(const Duration(seconds: 3));
-    await updateData();
-  }
-
   List<Tracker> get trackersByToday {
     final currentDate = DateTime.now();
     return _trackers.where((tracker) {

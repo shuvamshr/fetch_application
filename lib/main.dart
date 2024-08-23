@@ -37,16 +37,19 @@ class MainApp extends StatelessWidget {
       title: 'Fetch App',
       debugShowCheckedModeBanner: false,
       home: FutureBuilder<void>(
-          future: trackerViewModel.simulateLoading(),
-          builder: (context, snapshot) {
+        future: trackerViewModel.updateData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {
               return Text('Error loading data: ${snapshot.error}');
-            } else if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: FetchLoadingIndicator());
             } else {
               return const TrackerView();
             }
-          }),
+          } else {
+            return const Center(child: FetchLoadingIndicator());
+          }
+        },
+      ),
     );
   }
 }

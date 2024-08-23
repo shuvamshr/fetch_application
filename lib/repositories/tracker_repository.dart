@@ -1,19 +1,14 @@
-import 'dart:convert';
 import 'package:fetch_application/models/tracker_model.dart';
-import 'package:flutter/services.dart';
+import 'package:fetch_application/services/tracker_service.dart';
 
 class TrackerRepository {
   List<Tracker> _trackers = [];
+  final TrackerService _trackerService = TrackerService();
 
   Future<List<Tracker>> fetchTrackers() async {
     try {
       if (_trackers.isEmpty) {
-        final jsonString =
-            await rootBundle.loadString('data/tracker_data.json');
-        final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
-        final List<dynamic> jsonList = jsonMap['trackers'];
-
-        _trackers = jsonList.map((json) => Tracker.fromJson(json)).toList();
+        _trackers = await _trackerService.fetchData();
       }
       return _trackers;
     } catch (e) {
