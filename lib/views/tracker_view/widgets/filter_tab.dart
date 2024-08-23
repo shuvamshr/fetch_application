@@ -26,7 +26,8 @@ class FilterTab extends StatelessWidget {
           if (pet.id != 'null') ...[
             CircleAvatar(
               radius: 28 / 2,
-              backgroundImage: AssetImage('images/pets/${pet.image}.png'),
+              backgroundImage:
+                  AssetImage('assets/images/pets/${pet.image}.png'),
             ),
             const SizedBox(width: 8),
           ],

@@ -45,75 +45,78 @@ class AddTrackerView extends StatelessWidget {
           const SizedBox(width: 24),
         ],
       ),
-      body: FetchAppBody(
-        children: [
-          FormSection(
-            children: [
-              GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                      builder: (context) => PetSelectorView(
-                          pets: trackerViewObservable.allPets,
-                          selectedPet: trackerViewObservable.selectedPet,
-                          onOptionSelected: (pet) =>
-                              trackerViewAction.selectedPet = pet)),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: FetchAppBody(
+          children: [
+            FormSection(
+              children: [
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                        builder: (context) => PetSelectorView(
+                            pets: trackerViewObservable.allPets,
+                            selectedPet: trackerViewObservable.selectedPet,
+                            onOptionSelected: (pet) =>
+                                trackerViewAction.selectedPet = pet)),
+                  ),
+                  child: FormTile(
+                    type: "pets",
+                    label: "Pet",
+                    selection: trackerViewObservable.selectedPet.name,
+                    image: trackerViewObservable.selectedPet.image,
+                  ),
                 ),
-                child: FormTile(
-                  type: "pets",
-                  label: "Pet",
-                  selection: trackerViewObservable.selectedPet.name,
-                  image: trackerViewObservable.selectedPet.image,
+              ],
+            ),
+            const SizedBox(height: 20),
+            FormSection(
+              children: [
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                        builder: (context) => CategorySelectorView(
+                            categories: trackerViewObservable.allCategories,
+                            selectedCategory:
+                                trackerViewObservable.selectedCategory,
+                            onOptionSelected: (category) =>
+                                trackerViewAction.selectedCategory = category)),
+                  ),
+                  child: FormTile(
+                    type: "category",
+                    label: "Category",
+                    selection: trackerViewObservable.selectedCategory.title,
+                    image: trackerViewObservable.selectedCategory.image,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          FormSection(
-            children: [
-              GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                      builder: (context) => CategorySelectorView(
-                          categories: trackerViewObservable.allCategories,
-                          selectedCategory:
-                              trackerViewObservable.selectedCategory,
-                          onOptionSelected: (category) =>
-                              trackerViewAction.selectedCategory = category)),
+              ],
+            ),
+            const SizedBox(height: 20),
+            FormSection(
+              children: [
+                DatePicker(
+                  initialDate: trackerViewObservable.selectedDateTime,
+                  onDateSelected: (date) =>
+                      trackerViewAction.selectedDateTime = date,
                 ),
-                child: FormTile(
-                  type: "category",
-                  label: "Category",
-                  selection: trackerViewObservable.selectedCategory.title,
-                  image: trackerViewObservable.selectedCategory.image,
+                PriorityPicker(
+                  initialPriority: trackerViewObservable.selectedPriority,
+                  onPrioritySelected: (priority) =>
+                      trackerViewAction.selectedPriority = priority,
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          FormSection(
-            children: [
-              DatePicker(
-                initialDate: trackerViewObservable.selectedDateTime,
-                onDateSelected: (date) =>
-                    trackerViewAction.selectedDateTime = date,
-              ),
-              PriorityPicker(
-                initialPriority: trackerViewObservable.selectedPriority,
-                onPrioritySelected: (priority) =>
-                    trackerViewAction.selectedPriority = priority,
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          PrimaryButton(
-              title: "Add Tracker",
-              onPressed: () => {
-                    trackerViewAction.addTracker(),
-                    Navigator.pop(context),
-                  }),
-        ],
+              ],
+            ),
+            const SizedBox(height: 20),
+            PrimaryButton(
+                title: "Add Tracker",
+                onPressed: () => {
+                      trackerViewAction.addTracker(),
+                      Navigator.pop(context),
+                    }),
+          ],
+        ),
       ),
     );
   }

@@ -25,6 +25,7 @@ class FilterTabListView extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(width: 16),
             GestureDetector(
               onTap: () => onTabSelected(allPets),
               child: FilterTab(
@@ -43,6 +44,7 @@ class FilterTabListView extends StatelessWidget {
                   ),
                 ),
               ),
+            const SizedBox(width: 16),
           ],
         ),
       ),

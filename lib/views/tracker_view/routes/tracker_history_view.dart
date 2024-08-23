@@ -35,21 +35,24 @@ class TrackerHistoryView extends StatelessWidget {
           const SizedBox(width: 24),
         ],
       ),
-      body: FetchAppBody(children: [
-        if (trackerViewObservable.trackersByPast.isNotEmpty)
-          TrackerCardListView(
-              title: "Past For All Pets",
-              trackers: trackerViewObservable.trackersByPast),
-        if (trackerViewObservable.trackersByPast.isEmpty)
-          Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.only(top: 128),
-            child: Text(
-              "No History Of Trackers",
-              style: appBodyNoteStyle,
-            ),
-          )
-      ]),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: FetchAppBody(children: [
+          if (trackerViewObservable.trackersByPast.isNotEmpty)
+            TrackerCardListView(
+                title: "Past For All Pets",
+                trackers: trackerViewObservable.trackersByPast),
+          if (trackerViewObservable.trackersByPast.isEmpty)
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.only(top: 128),
+              child: Text(
+                "No History Of Trackers",
+                style: appBodyNoteStyle,
+              ),
+            )
+        ]),
+      ),
     );
   }
 }

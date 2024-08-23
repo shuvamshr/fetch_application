@@ -29,7 +29,8 @@ class MedicationCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image(
-                image: AssetImage('images/company/${medication.image}.png'),
+                image:
+                    AssetImage('assets/images/company/${medication.image}.png'),
                 fit: BoxFit
                     .cover, // Ensures the image covers the entire container
               ),

@@ -31,12 +31,12 @@ class TrackerCard extends StatelessWidget {
               CircleAvatar(
                 radius: 52 / 2,
                 backgroundImage: AssetImage(
-                    'images/pets/${tracker.getPet(trackerViewObservable.allPets).image}.png'),
+                    'assets/images/pets/${tracker.getPet(trackerViewObservable.allPets).image}.png'),
               ),
               CircleAvatar(
                 radius: 26 / 2,
                 backgroundImage: AssetImage(
-                    'images/category/${tracker.getCategory(trackerViewObservable.allCategories).image}.png'),
+                    'assets/images/category/${tracker.getCategory(trackerViewObservable.allCategories).image}.png'),
               ),
             ],
           ),

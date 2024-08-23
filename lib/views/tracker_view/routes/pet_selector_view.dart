@@ -40,27 +40,30 @@ class PetSelectorView extends StatelessWidget {
             const SizedBox(width: 24),
           ],
         ),
-        body: FetchAppBody(
-          children: [
-            FormSection(
-              children: [
-                for (var pet in pets) ...[
-                  GestureDetector(
-                    onTap: () => {
-                      onOptionSelected(pet),
-                      Navigator.pop(context),
-                    },
-                    child: OptionTile(
-                      title: pet.name,
-                      type: 'pets',
-                      image: pet.image,
-                      isSelected: selectedPet == pet,
-                    ),
-                  )
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: FetchAppBody(
+            children: [
+              FormSection(
+                children: [
+                  for (var pet in pets) ...[
+                    GestureDetector(
+                      onTap: () => {
+                        onOptionSelected(pet),
+                        Navigator.pop(context),
+                      },
+                      child: OptionTile(
+                        title: pet.name,
+                        type: 'pets',
+                        image: pet.image,
+                        isSelected: selectedPet == pet,
+                      ),
+                    )
+                  ],
                 ],
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ));
   }
 }

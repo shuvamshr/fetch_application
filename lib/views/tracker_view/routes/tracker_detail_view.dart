@@ -63,49 +63,52 @@ class TrackerDetailView extends StatelessWidget {
                   }),
         ],
       ),
-      body: FetchAppBody(
-        children: [
-          FormSection(
-            title: 'Tracker Detail',
-            children: [
-              FormTile(
-                type: 'pets',
-                label: 'Pet',
-                selection: tracker.getPet(trackerViewObservable.allPets).name,
-                image: tracker.getPet(trackerViewObservable.allPets).image,
-                readOnly: true,
-              ),
-              FormTile(
-                type: 'category',
-                label: 'Category',
-                selection: tracker
-                    .getCategory(trackerViewObservable.allCategories)
-                    .title,
-                image: tracker
-                    .getCategory(trackerViewObservable.allCategories)
-                    .image,
-                readOnly: true,
-              ),
-              FormTile(
-                type: 'dateTime',
-                label: 'Date',
-                selection: DateFormat('dd MMM yyyy').format(tracker.dateTime),
-                readOnly: true,
-              ),
-              FormTile(
-                type: 'priority',
-                label: 'Priority',
-                selection: tracker.priority,
-                readOnly: true,
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          if (recommendedMedications.isNotEmpty)
-            MedicationCardListView(
-                medications: recommendedMedications,
-                title: "Recommended Medications")
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: FetchAppBody(
+          children: [
+            FormSection(
+              title: 'Tracker Detail',
+              children: [
+                FormTile(
+                  type: 'pets',
+                  label: 'Pet',
+                  selection: tracker.getPet(trackerViewObservable.allPets).name,
+                  image: tracker.getPet(trackerViewObservable.allPets).image,
+                  readOnly: true,
+                ),
+                FormTile(
+                  type: 'category',
+                  label: 'Category',
+                  selection: tracker
+                      .getCategory(trackerViewObservable.allCategories)
+                      .title,
+                  image: tracker
+                      .getCategory(trackerViewObservable.allCategories)
+                      .image,
+                  readOnly: true,
+                ),
+                FormTile(
+                  type: 'dateTime',
+                  label: 'Date',
+                  selection: DateFormat('dd MMM yyyy').format(tracker.dateTime),
+                  readOnly: true,
+                ),
+                FormTile(
+                  type: 'priority',
+                  label: 'Priority',
+                  selection: tracker.priority,
+                  readOnly: true,
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            if (recommendedMedications.isNotEmpty)
+              MedicationCardListView(
+                  medications: recommendedMedications,
+                  title: "Recommended Medications")
+          ],
+        ),
       ),
     );
   }

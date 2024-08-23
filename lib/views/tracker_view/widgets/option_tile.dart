@@ -21,7 +21,7 @@ class OptionTile extends StatelessWidget {
       children: [
         if (type == 'pets' || type == 'category') ...[
           CircleAvatar(
-            backgroundImage: AssetImage('images/$type/$image.png'),
+            backgroundImage: AssetImage('assets/images/$type/$image.png'),
             radius: 24 / 2,
           ),
           const SizedBox(width: 8),
