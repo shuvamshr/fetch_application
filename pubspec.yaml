@@ -14,11 +14,13 @@ dependencies:
   intl: ^0.19.0
   url_launcher: ^6.3.0
   http: ^1.2.2
+  cupertino_icons: ^1.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  
 
 flutter:
   uses-material-design: true
@@ -30,7 +32,10 @@ flutter:
       fonts:
         - asset: assets/fonts/Circular-Std-Medium.ttf
   assets:
-    - assets/data/
+    - assets/data/category_data.json
+    - assets/data/medication_data.json
+    - assets/data/pet_data.json
+    - assets/data/tracker_data.json
     - assets/images/category/
     - assets/images/company/
     - assets/images/other/
