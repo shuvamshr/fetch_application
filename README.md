@@ -2,12 +2,14 @@
 
 Welcome to the Fetch App's Parasite Control feature! This project is a proof-of-concept designed to showcase a flea tracking and ordering system built using Flutter. The main focus was to create a responsive and maintainable frontend with solid data modeling and a simple, yet effective, software architecture for backend logic.
 
+## Live Demo
+
+Feel free to look around via the live link: https://fetch-application.web.app/
+
 ## How-To Run
 
 - Install Flutter https://docs.flutter.dev/get-started/install
 - Open any terminal and enter >> git clone https://github.com/shuvamshr/fetch_application.git
-- Redirect to project folder and run command >> flutter run -d chrome --web-browser-flag "--disable-web-security"
-- Note: Disabling Web Security temporarily allows calling endpoints from Fetch_API
 
 ## Overview
 
