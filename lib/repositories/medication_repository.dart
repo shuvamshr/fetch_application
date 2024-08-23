@@ -7,9 +7,9 @@ class MedicationRepository {
   Future<List<Medication>> fetchMedications() async {
     try {
       final jsonString =
-          await rootBundle.loadString('data/medication_data.json');
-      final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
-      final List<dynamic> jsonList = jsonMap['medications'];
+          await rootBundle.loadString('assets/data/medication_data.json');
+      final Map<String, dynamic> jsonMap = await jsonDecode(jsonString);
+      final List<dynamic> jsonList = await jsonMap['medications'];
 
       List<Medication> medications =
           jsonList.map((json) => Medication.fromJson(json)).toList();

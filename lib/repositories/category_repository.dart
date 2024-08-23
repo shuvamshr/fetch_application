@@ -6,7 +6,8 @@ import 'package:flutter/services.dart';
 class CategoryRepository {
   Future<List<Category>> fetchCategories() async {
     try {
-      final jsonString = await rootBundle.loadString('data/category_data.json');
+      final jsonString =
+          await rootBundle.loadString('assets/data/category_data.json');
       final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
       final List<dynamic> jsonList = jsonMap['categories'];
 
