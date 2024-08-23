@@ -35,9 +35,8 @@ class TrackerHistoryView extends StatelessWidget {
           const SizedBox(width: 24),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: FetchAppBody(children: [
+      body: FetchAppBody(
+        children: [
           if (trackerViewObservable.trackersByPast.isNotEmpty)
             TrackerCardListView(
                 title: "Past For All Pets",
@@ -50,8 +49,8 @@ class TrackerHistoryView extends StatelessWidget {
                 "No History Of Trackers",
                 style: appBodyNoteStyle,
               ),
-            )
-        ]),
+            ),
+        ],
       ),
     );
   }
